@@ -55,8 +55,10 @@ if ( is_woocommerce_active() ) {
 
 	// Load includes in dependency order.
 	$plugin_name_includes = array(
+		'/includes/saai_framework/class-saai-admin-page.php',
+		'/includes/saai_framework/class-saai-wc-user.php',
+		'/includes/admin/class-saai-admin-plugin-name.php',
 		'/includes/class-plugin-name.php',
-		'/includes/admin/class-plugin-name-admin.php',
 		'/includes/admin/class-plugin-name-rest-api.php',
 		'/includes/class-plugin-name-core.php',
 	);

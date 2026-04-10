@@ -2,7 +2,7 @@
 	"name": "plugin-name",
 	"version": "1.0.0",
 	"author": "Shohei Tanaka",
-	"license": "GPL-3.0+",
+	"license": "GPL-3.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build --blocks-manifest",

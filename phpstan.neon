@@ -1,5 +1,4 @@
 includes:
-    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
     - phpstan-baseline.neon
 
 parameters:
@@ -18,7 +17,8 @@ parameters:
     bootstrapFiles:
         - vendor/autoload.php
 
-    # WooCommerce stubs not in dev dependencies — suppress known WC symbols.
+    # WooCommerce stubs are not bundled — suppress known WC symbols.
     ignoreErrors:
         - '#Function wc_\w+ not found#'
         - '#Class WC_\w+ not found#'
+        - '#Class Automattic\\\\WooCommerce\\\\#'

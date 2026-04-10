@@ -42,7 +42,13 @@ class Plugin_Name {
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 
 		if ( is_admin() ) {
-			Plugin_Name_Admin::instance();
+			new \SAAI\Admin\SAAI_Admin_Page(
+				array(
+					'page_title' => __( 'Plugin Name', 'plugin-name' ),
+					'menu_title' => __( 'Plugin Name', 'plugin-name' ),
+				)
+			);
+			\SAAI\Admin\SAAI_Admin_Plugin_Name::instance();
 		}
 
 		Plugin_Name_REST_API::instance();

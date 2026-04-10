@@ -8,7 +8,6 @@
 
 namespace SAAI\Admin;
 
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -37,42 +36,16 @@ if ( ! class_exists( 'SAAI\Admin\SAAI_Admin_Page' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @param array $options Plugin options array.
+		 * @param array $options Plugin options array (page_title, menu_title).
 		 * @since 1.0.0
 		 */
-		public function __construct( $options ) {
+		public function __construct( $options = array() ) {
 			$this->options   = $options;
 			$this->menu_slug = 'saai-overview';
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'saai_admin_register_scripts' ) );
 			add_action( 'admin_menu', array( $this, 'register_saai_admin_overview_page' ) );
 			add_filter( 'admin_body_class', array( $this, 'add_saai_admin_body_class' ) );
-		}
-
-		/**
-		 * Instance of this class.
-		 *
-		 * @var SAAI_Admin_Page
-		 */
-		private static $instance;
-
-		/**
-		 * Get the instance of this class.
-		 *
-		 * @return SAAI_Admin_Page
-		 */
-		public static function instance() {
-			if ( ! isset( self::$instance ) ) {
-				self::$instance = new self();
-				self::$instance->init( array() );
-			}
-			return self::$instance;
-		}
-
-		/**
-		 * Initialize the plugin.
-		 */
-		private function init() {
 		}
 
 		/**
@@ -118,11 +91,11 @@ if ( ! class_exists( 'SAAI\Admin\SAAI_Admin_Page' ) ) :
 			$script_path       = PLUGIN_NAME_PATH . '/assets/build/saai/admin/overview.js';
 			$script_asset_path = PLUGIN_NAME_PATH . '/assets/build/saai/admin/overview.asset.php';
 			$script_asset      = file_exists( $script_asset_path )
-			? require $script_asset_path
-			: array(
-				'dependencies' => array(),
-				'version'      => filemtime( $script_path ),
-			);
+				? require $script_asset_path
+				: array(
+					'dependencies' => array(),
+					'version'      => file_exists( $script_path ) ? filemtime( $script_path ) : PLUGIN_NAME_VERSION,
+				);
 			$script_url        = PLUGIN_NAME_URL . 'assets/build/saai/admin/overview.js';
 
 			wp_register_script(
@@ -133,11 +106,12 @@ if ( ! class_exists( 'SAAI\Admin\SAAI_Admin_Page' ) ) :
 				true
 			);
 
+			$style_path = PLUGIN_NAME_PATH . '/assets/build/saai/admin/overview.css';
 			wp_register_style(
 				$this->menu_slug,
-				PLUGIN_NAME_URL . '/assets/build/saai/admin/overview.css',
+				PLUGIN_NAME_URL . 'assets/build/saai/admin/overview.css',
 				array(),
-				filemtime( PLUGIN_NAME_PATH . '/assets/build/saai/admin/overview.css' )
+				file_exists( $style_path ) ? filemtime( $style_path ) : PLUGIN_NAME_VERSION
 			);
 
 			wp_localize_script(

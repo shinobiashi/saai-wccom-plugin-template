@@ -28,6 +28,7 @@ const requestToHandle = ( request ) => {
 module.exports = {
 	...defaultConfig,
 	entry: {
+		'saai/admin/overview': './src/saai/admin/overview/index.js',
 		'saai/admin/plugin-name': './src/saai/admin/plugin-name/index.js',
 	},
 	output: {
