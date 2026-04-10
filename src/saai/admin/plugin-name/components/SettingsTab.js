@@ -93,6 +93,7 @@ const SettingsTab = () => {
 						onChange={ ( value ) =>
 							setSettings( { ...settings, enabled: value } )
 						}
+						__nextHasNoMarginBottom
 					/>
 
 					{ /* ── Add more settings controls here ──────────────────── */ }

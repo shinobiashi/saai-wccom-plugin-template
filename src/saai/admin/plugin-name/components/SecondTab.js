@@ -291,6 +291,8 @@ const SecondTab = () => {
 								{ label: __( 'Done', 'plugin-name' ), value: 'done' },
 							] }
 							onChange={ handleStatusChange }
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 						<Button
 							variant="secondary"
