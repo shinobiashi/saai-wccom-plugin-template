@@ -1,12 +1,10 @@
 <?php
 /**
- * Main class file for Plugin Name
+ * Main class file for Plugin Name.
  *
  * @package Plugin_Name
  * @since 1.0.0
  */
-
-use SAAI\Admin\SAAI_Admin_Page;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -41,6 +39,14 @@ class Plugin_Name {
 	 * Initialize the plugin.
 	 */
 	private function init() {
+		add_action( 'init', array( $this, 'load_textdomain' ) );
+
+		if ( is_admin() ) {
+			Plugin_Name_Admin::instance();
+		}
+
+		Plugin_Name_REST_API::instance();
+		Plugin_Name_Core::instance();
 	}
 
 	/**
@@ -49,27 +55,43 @@ class Plugin_Name {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		if ( is_admin() ) {
-			$admin_menu = array(
-				'page_title'  => __( 'SAAI overview', 'plugin-name' ),
-				'menu_title'  => __( 'SAAI', 'plugin-name' ),
-				'plugin_path' => PLUGIN_NAME_PATH,
-			);
-			new SAAI_Admin_Page( $admin_menu );
-		}
+	}
+
+	/**
+	 * Load plugin textdomain.
+	 */
+	public function load_textdomain() {
+		load_plugin_textdomain( 'plugin-name', false, dirname( plugin_basename( PLUGIN_NAME_PATH . '/plugin-name.php' ) ) . '/i18n' );
 	}
 
 	/**
 	 * Plugin activation handler.
 	 */
 	public static function activate() {
-		// Activation tasks: create tables, schedule events, etc.
+		Plugin_Name_Core::create_tables();
+		self::set_default_options();
 	}
 
 	/**
 	 * Plugin deactivation handler.
 	 */
 	public static function deactivate() {
-		// Deactivation tasks: clear scheduled events, etc.
+		wp_clear_scheduled_hook( 'plugin_name_cron_hook' );
+	}
+
+	/**
+	 * Set default plugin options on activation.
+	 */
+	private static function set_default_options() {
+		$defaults = array(
+			'plugin_name_setting_1' => 'default_value',
+			'plugin_name_setting_2' => true,
+		);
+
+		foreach ( $defaults as $key => $value ) {
+			if ( false === get_option( $key ) ) {
+				update_option( $key, $value );
+			}
+		}
 	}
 }

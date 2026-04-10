@@ -1,0 +1,24 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - phpstan-baseline.neon
+
+parameters:
+    level: 5
+
+    paths:
+        - plugin-name.php
+        - includes/
+
+    excludePaths:
+        - vendor/
+        - node_modules/
+        - build/
+        - tests/
+
+    bootstrapFiles:
+        - vendor/autoload.php
+
+    # WooCommerce stubs not in dev dependencies — suppress known WC symbols.
+    ignoreErrors:
+        - '#Function wc_\w+ not found#'
+        - '#Class WC_\w+ not found#'

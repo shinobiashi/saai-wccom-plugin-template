@@ -1,20 +1,21 @@
 <?php
 /**
- * Plugin Name: plugin_name
- * Plugin URI: https://example.com/
+ * Plugin Name: Plugin Name
+ * Plugin URI: https://woocommerce.com/products/plugin-name/
  * Description: A brief description of this plugin.
  * Version: 1.0.0
  * Author: Shohei Tanaka
- * Author URI: https://example.com/
+ * Author URI: https://shinobiashi.ai/
  * License: GPL-3.0-or-later
  * Text Domain: plugin-name
  * Domain Path: /i18n
- * Requires at least: 6.4
- * Tested up to: 6.8.2
+ * Requires at least: 6.7
+ * Tested up to: 6.9
  * Requires PHP: 8.2
  * WC requires at least: 9.0
- * WC tested up to: 10.1
- * Network: false
+ * WC tested up to: 10.6.2
+ *
+ * Woo: XXXXX:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
  *
  * @package Plugin_Name
  */
@@ -54,16 +55,16 @@ if ( is_woocommerce_active() ) {
 
 	// Load includes in dependency order.
 	$plugin_name_includes = array(
-		'/includes/saai_framework/class-saai-wc-user.php',
-		'/includes/saai_framework/class-saai-admin-page.php',
 		'/includes/class-plugin-name.php',
-		'/includes/admin/class-saai-admin-plugin-name.php',
+		'/includes/admin/class-plugin-name-admin.php',
+		'/includes/admin/class-plugin-name-rest-api.php',
+		'/includes/class-plugin-name-core.php',
 	);
 
-	foreach ( $plugin_name_includes as $file ) {
-		$file_path = __DIR__ . $file;
-		if ( file_exists( $file_path ) ) {
-			require_once $file_path;
+	foreach ( $plugin_name_includes as $plugin_name_file ) {
+		$plugin_name_file_path = __DIR__ . $plugin_name_file;
+		if ( file_exists( $plugin_name_file_path ) ) {
+			require_once $plugin_name_file_path;
 		}
 	}
 
@@ -74,22 +75,20 @@ if ( is_woocommerce_active() ) {
 
 	/**
 	 * Initialize the plugin.
-	 *
-	 * Loads the text domain and initializes the main plugin class.
 	 */
 	function plugin_name_init() {
-		load_plugin_textdomain( 'plugin-name', false, plugin_basename( __DIR__ ) . '/i18n' );
 		Plugin_Name::instance();
 	}
 
 	/**
-	 * Declare plugin compatibility with WooCommerce HPOS.
+	 * Declare plugin compatibility with WooCommerce features.
 	 */
 	add_action(
 		'before_woocommerce_init',
 		function () {
 			if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
 				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
 			}
 		}
 	);

@@ -1,0 +1,20 @@
+.plugin-name-container {
+	max-width: 900px;
+	padding: 20px 0;
+
+	.plugin-name-header {
+		margin-bottom: 24px;
+
+		h1 {
+			font-size: 1.5em;
+			font-weight: 600;
+		}
+	}
+
+	.plugin-name-tabs {
+		.components-tab-panel__tabs {
+			border-bottom: 1px solid #ddd;
+			margin-bottom: 24px;
+		}
+	}
+}

@@ -9,6 +9,8 @@ jobs:
   release:
     name: Build & Release
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout
@@ -30,7 +32,7 @@ jobs:
 
       - name: Create plugin zip
         run: |
-          PLUGIN_SLUG="saai-blocks"
+          PLUGIN_SLUG=$(node -p "require('./package.json').name")
           VERSION="${{ steps.version.outputs.VERSION }}"
           DEST="${PLUGIN_SLUG}-${VERSION}"
 
@@ -47,10 +49,12 @@ jobs:
           # Move to workspace
           mv "${PLUGIN_SLUG}-${VERSION}.zip" "$GITHUB_WORKSPACE/"
 
+          echo "PLUGIN_SLUG=${PLUGIN_SLUG}" >> "$GITHUB_ENV"
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
           generate_release_notes: true
-          files: saai-blocks-${{ steps.version.outputs.VERSION }}.zip
+          files: ${{ env.PLUGIN_SLUG }}-${{ steps.version.outputs.VERSION }}.zip

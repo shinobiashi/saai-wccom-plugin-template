@@ -1,0 +1,31 @@
+{
+	"extends": [
+		"plugin:@woocommerce/eslint-plugin/recommended"
+	],
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
+	"rules": {
+		"@wordpress/i18n-text-domain": [
+			"error",
+			{
+				"allowedTextDomain": "plugin-name"
+			}
+		],
+		"react/react-in-jsx-scope": "off",
+		"jsdoc/empty-tags": "off"
+	}
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<ruleset name="Plugin Name">
+	<description>PHPCS ruleset for WooCommerce Marketplace submission</description>
+
+	<file>.</file>
+
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>node_modules/*</exclude-pattern>
+	<exclude-pattern>build/*</exclude-pattern>
+	<exclude-pattern>tests/*</exclude-pattern>
+	<exclude-pattern>assets/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<!-- WordPress Coding Standards -->
+	<rule ref="WordPress-Extra">
+		<!-- Allow PSR-4 style class file names alongside WP conventions -->
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+	</rule>
+
+	<rule ref="WordPress-Docs"/>
+
+	<!-- Enforce text domain -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="plugin-name"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Register manage_woocommerce as a known WooCommerce capability -->
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<property name="custom_capabilities" type="array">
+				<element value="manage_woocommerce"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- REST API handlers: suppress unused parameter sniff per-file -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
+		<exclude-pattern>includes/admin/class-plugin-name-rest-api\.php</exclude-pattern>
+	</rule>
+
+	<!-- PHP Compatibility: require PHP 8.2+ -->
+	<config name="testVersion" value="8.2-"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- Minimum supported WordPress version -->
+	<config name="minimum_supported_wp_version" value="6.7"/>
+</ruleset>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r /Users/shoheitanaka/Dev/saai-ten4wc/.claude/skills/wc-development /Users/shoheitanaka/Dev/saai-wccom-plugin-template/.claude/skills/)",
+      "Bash(cp -r /Users/shoheitanaka/Dev/saai-ten4wc/.claude/skills/woo-marketplace-content /Users/shoheitanaka/Dev/saai-wccom-plugin-template/.claude/skills/)",
+      "Bash(cp -r /Users/shoheitanaka/Dev/saai-ten4wc/.claude/skills/woo-marketplace-extension /Users/shoheitanaka/Dev/saai-wccom-plugin-template/.claude/skills/)",
+      "Bash(cp -r /Users/shoheitanaka/Dev/saai-ten4wc/.claude/skills/woo-marketplace-pricing /Users/shoheitanaka/Dev/saai-wccom-plugin-template/.claude/skills/)",
+      "Bash(cp -r /Users/shoheitanaka/Dev/saai-ten4wc/.claude/skills/woo-marketplace-qit /Users/shoheitanaka/Dev/saai-wccom-plugin-template/.claude/skills/)"
+    ]
+  }
+}

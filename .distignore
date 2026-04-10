@@ -21,7 +21,12 @@ composer.lock
 .stylelintrc
 .phpcs.xml
 phpcs.xml
+phpcs.xml.dist
 phpunit.xml
+phpunit.xml.dist
+phpstan.neon
+phpstan-baseline.neon
+tests/
 
 # VCS
 .git/

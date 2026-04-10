@@ -2,13 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(npm run build)",
+      "Bash(npm run start)",
+      "Bash(npm run lint:js)",
+      "Bash(npm run lint:css)",
+      "Bash(composer phpcs)",
+      "Bash(composer phpcbf)",
+      "Bash(composer phpstan)",
+      "Bash(composer test)",
       "Bash(wp --version)",
-      "Bash(/Users/shoheitanaka/Dev/saai-blocks/i18n/saai-blocks-ja.po:*)",
-      "Bash(msgfmt /Users/shoheitanaka/Dev/saai-blocks/i18n/saai-blocks-ja.po -o /Users/shoheitanaka/Dev/saai-blocks/i18n/saai-blocks-ja.mo)",
-      "Bash(/Users/shoheitanaka/Dev/saai-blocks/i18n/saai-blocks-ja-saai-blocks-settings.json:*)",
-      "Bash(md5)",
-      "Bash(wp-env run cli wp eval \":*)",
-      "Bash(wp-env run:*)"
+      "Bash(wp-env run:*)",
+      "Bash(wp-env run cli wp eval \":*)"
     ]
   }
 }

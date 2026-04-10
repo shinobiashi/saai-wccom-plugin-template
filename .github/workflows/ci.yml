@@ -1,0 +1,154 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  phpcs:
+    name: PHPCS
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist
+
+      - name: Run PHPCS
+        run: composer phpcs
+
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist
+
+      - name: Run PHPStan
+        run: composer phpstan
+        env:
+          PHPSTAN_MEMORY_LIMIT: 1G
+
+  php-compatibility:
+    name: PHP Compatibility (${{ matrix.php }})
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    strategy:
+      matrix:
+        php: [ '8.2', '8.3', '8.4' ]
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist
+
+      - name: Run PHP Compatibility check
+        run: |
+          ./vendor/bin/phpcs \
+            --standard=PHPCompatibilityWP \
+            --runtime-set testVersion ${{ matrix.php }} \
+            --extensions=php \
+            --ignore=vendor/,node_modules/,build/,tests/ \
+            .
+
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.3.0
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint:js
+
+  activation-test:
+    name: Activation Test (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ '8.2', '8.3' ]
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.3.0
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install dependencies & build
+        run: |
+          composer install --no-progress --prefer-dist
+          npm ci
+          npm run build
+
+      - name: Install wp-env
+        run: npm -g install @wordpress/env
+
+      - name: Configure PHP version override
+        run: |
+          cat > .wp-env.override.json << EOF
+          {
+            "env": {
+              "tests": { "phpVersion": "${{ matrix.php }}" }
+            }
+          }
+          EOF
+
+      - name: Start wp-env
+        run: wp-env start
+
+      - name: Verify activation (no PHP errors)
+        run: |
+          wp-env run tests-cli wp plugin activate plugin-name
+          wp-env run tests-cli wp plugin list --status=active --fields=name --format=csv \
+            | grep -q "plugin-name" && echo "Plugin active: OK"
+          wp-env run tests-cli wp eval \
+            "error_reporting(E_ALL); do_action('plugins_loaded'); echo 'OK';" \
+            | grep -q "OK" && echo "No PHP errors on plugins_loaded: OK"

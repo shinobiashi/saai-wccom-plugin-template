@@ -13,21 +13,28 @@
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start --blocks-manifest",
 		"postinstall": "composer install",
-		"make-pot": "wp-env run cli --env-cwd=wp-content/plugins/saai-blocks/ wp i18n make-pot ./ i18n/saai-blocks.pot --ignore-domain",
-		"make-json": "wp-env run cli --env-cwd=wp-content/plugins/saai-blocks/ wp i18n make-json i18n --no-purge"
+		"make-pot": "wp-env run cli --env-cwd=wp-content/plugins/plugin-name/ wp i18n make-pot ./ i18n/plugin-name.pot --ignore-domain",
+		"make-json": "wp-env run cli --env-cwd=wp-content/plugins/plugin-name/ wp i18n make-json i18n --no-purge",
+		"playwright:install": "playwright install chromium --with-deps",
+		"test:e2e": "playwright test --config=tests/e2e/playwright.config.ts",
+		"test:e2e:ui": "playwright test --config=tests/e2e/playwright.config.ts --ui",
+		"test:e2e:debug": "playwright test --config=tests/e2e/playwright.config.ts --debug",
+		"test:e2e:headed": "playwright test --config=tests/e2e/playwright.config.ts --headed"
 	},
 	"dependencies": {
-		"@google/model-viewer": "^3.5.0",
 		"@woocommerce/components": "latest",
+		"@wordpress/api-fetch": "latest",
 		"@wordpress/hooks": "latest",
 		"@wordpress/i18n": "latest"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.49.0",
 		"@woocommerce/dependency-extraction-webpack-plugin": "latest",
 		"@woocommerce/eslint-plugin": "latest",
 		"@wordpress/prettier-config": "latest",
 		"@wordpress/scripts": "latest",
-		"ajv": "^8.17.1"
+		"ajv": "^8.17.1",
+		"typescript": "~5.7.0"
 	},
 	"overrides": {
 		"@wordpress/vips": "1.0.1-next.v.202602200903.0"
