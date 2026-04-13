@@ -146,9 +146,9 @@ jobs:
 
       - name: Verify activation (no PHP errors)
         run: |
-          wp-env run tests-cli wp plugin activate plugin-name
-          wp-env run tests-cli wp plugin list --status=active --fields=name --format=csv \
-            | grep -q "plugin-name" && echo "Plugin active: OK"
+          wp-env run tests-cli wp plugin activate ${{ github.event.repository.name }}
+          wp-env run tests-cli wp plugin list --status=active --fields=file --format=csv \
+            | grep -q "${{ github.event.repository.name }}" && echo "Plugin active: OK"
           wp-env run tests-cli wp eval \
             "error_reporting(E_ALL); do_action('plugins_loaded'); echo 'OK';" \
             | grep -q "OK" && echo "No PHP errors on plugins_loaded: OK"

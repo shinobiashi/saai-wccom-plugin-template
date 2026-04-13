@@ -28,7 +28,9 @@ async function goToSettings( page: Page ) {
 // ─── P0: Page load ────────────────────────────────────────────────────────────
 
 test.describe( 'P0 – Settings page load', () => {
-	test( 'renders the React app without console errors', async ( { page } ) => {
+	test( 'renders the React app without console errors', async ( {
+		page,
+	} ) => {
 		const getErrors = collectConsoleErrors( page );
 
 		await page.goto( SETTINGS_URL );
@@ -41,8 +43,12 @@ test.describe( 'P0 – Settings page load', () => {
 	test( 'settings page is visible and interactive', async ( { page } ) => {
 		await goToSettings( page );
 		await expect( page.locator( '.plugin-name-container' ) ).toBeVisible();
-		await expect( page.getByRole( 'tab', { name: 'Settings' } ) ).toBeVisible();
-		await expect( page.getByRole( 'tab', { name: 'Second Tab' } ) ).toBeVisible();
+		await expect(
+			page.getByRole( 'tab', { name: 'Settings' } )
+		).toBeVisible();
+		await expect(
+			page.getByRole( 'tab', { name: 'Second Tab' } )
+		).toBeVisible();
 	} );
 } );
 
@@ -53,11 +59,15 @@ test.describe( 'P1 – Settings tab', () => {
 		await goToSettings( page );
 
 		await page.getByRole( 'tab', { name: 'Settings' } ).click();
-		await expect( page.getByRole( 'heading', { name: 'General Settings' } ) ).toBeVisible();
+		await expect(
+			page.getByRole( 'heading', { name: 'General Settings' } )
+		).toBeVisible();
 
 		await page.getByRole( 'button', { name: 'Save Settings' } ).click();
 		await expect(
-			page.locator( '.components-notice__content', { hasText: 'Settings saved successfully.' } )
+			page.locator( '.components-notice__content', {
+				hasText: 'Settings saved successfully.',
+			} )
 		).toBeVisible( { timeout: 10_000 } );
 	} );
 } );
@@ -68,7 +78,9 @@ test.describe( 'P1 – Second tab', () => {
 	test( 'second tab renders without errors', async ( { page } ) => {
 		await goToSettings( page );
 		await page.getByRole( 'tab', { name: 'Second Tab' } ).click();
-		await expect( page.getByRole( 'heading', { name: 'Item List' } ) ).toBeVisible();
+		await expect(
+			page.getByRole( 'heading', { name: 'Item List' } )
+		).toBeVisible();
 	} );
 } );
 
@@ -76,7 +88,9 @@ test.describe( 'P1 – Second tab', () => {
 
 test.describe( 'P0 – REST API security', () => {
 	test( 'unauthenticated request returns 401 or 403', async ( { page } ) => {
-		const response = await page.request.get( '/wp-json/plugin-name/v1/settings' );
+		const response = await page.request.get(
+			'/wp-json/plugin-name/v1/settings'
+		);
 		expect( [ 401, 403 ] ).toContain( response.status() );
 	} );
 } );

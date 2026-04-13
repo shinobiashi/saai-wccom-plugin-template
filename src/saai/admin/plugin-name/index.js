@@ -18,7 +18,9 @@ import './style.scss';
 
 // Register WP REST nonce for all apiFetch requests.
 if ( window.pluginNameData?.nonce ) {
-	apiFetch.use( apiFetch.createNonceMiddleware( window.pluginNameData.nonce ) );
+	apiFetch.use(
+		apiFetch.createNonceMiddleware( window.pluginNameData.nonce )
+	);
 }
 
 const rootElement = document.getElementById( 'plugin-name-root' );

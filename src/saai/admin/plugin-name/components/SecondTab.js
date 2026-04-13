@@ -22,15 +22,15 @@ import {
 import apiFetch from '@wordpress/api-fetch';
 
 const SecondTab = () => {
-	const [ items, setItems ]               = useState( [] );
-	const [ summary, setSummary ]           = useState( null );
-	const [ loading, setLoading ]           = useState( true );
+	const [ items, setItems ] = useState( [] );
+	const [ summary, setSummary ] = useState( null );
+	const [ loading, setLoading ] = useState( true );
 	const [ summaryLoading, setSummaryLoading ] = useState( true );
-	const [ notice, setNotice ]             = useState( null );
+	const [ notice, setNotice ] = useState( null );
 	const [ statusFilter, setStatusFilter ] = useState( '' );
-	const [ page, setPage ]                 = useState( 1 );
-	const [ totalPages, setTotalPages ]     = useState( 1 );
-	const [ total, setTotal ]               = useState( 0 );
+	const [ page, setPage ] = useState( 1 );
+	const [ totalPages, setTotalPages ] = useState( 1 );
+	const [ total, setTotal ] = useState( 0 );
 
 	// ─── Data loaders ──────────────────────────────────────────────────────────
 
@@ -138,7 +138,10 @@ const SecondTab = () => {
 						{ summary.total }
 					</span>
 				</div>
-				<div className="plugin-name-summary__divider" aria-hidden="true" />
+				<div
+					className="plugin-name-summary__divider"
+					aria-hidden="true"
+				/>
 				<div className="plugin-name-summary__item">
 					<span className="plugin-name-summary__label">
 						{ __( 'Pending', 'plugin-name' ) }
@@ -147,7 +150,10 @@ const SecondTab = () => {
 						{ summary.pending }
 					</span>
 				</div>
-				<div className="plugin-name-summary__divider" aria-hidden="true" />
+				<div
+					className="plugin-name-summary__divider"
+					aria-hidden="true"
+				/>
 				<div className="plugin-name-summary__item">
 					<span className="plugin-name-summary__label">
 						{ __( 'Active', 'plugin-name' ) }
@@ -156,7 +162,10 @@ const SecondTab = () => {
 						{ summary.active }
 					</span>
 				</div>
-				<div className="plugin-name-summary__divider" aria-hidden="true" />
+				<div
+					className="plugin-name-summary__divider"
+					aria-hidden="true"
+				/>
 				<div className="plugin-name-summary__item">
 					<span className="plugin-name-summary__label">
 						{ __( 'Done', 'plugin-name' ) }
@@ -200,7 +209,12 @@ const SecondTab = () => {
 								<td>
 									{ item.order_id ? (
 										<a
-											href={ `${ window.pluginNameData?.adminUrl ?? '' }post.php?post=${ item.order_id }&action=edit` }
+											href={ `${
+												window.pluginNameData
+													?.adminUrl ?? ''
+											}post.php?post=${
+												item.order_id
+											}&action=edit` }
 											target="_blank"
 											rel="noreferrer"
 										>
@@ -211,7 +225,9 @@ const SecondTab = () => {
 									) }
 								</td>
 								<td>
-									<span className={ `plugin-name-status plugin-name-status--${ item.status }` }>
+									<span
+										className={ `plugin-name-status plugin-name-status--${ item.status }` }
+									>
 										{ item.status }
 									</span>
 								</td>
@@ -234,7 +250,10 @@ const SecondTab = () => {
 						<span className="plugin-name-pagination__info">
 							{ sprintf(
 								/* translators: 1: current page, 2: total pages, 3: total items */
-								__( 'Page %1$d of %2$d (%3$d items)', 'plugin-name' ),
+								__(
+									'Page %1$d of %2$d (%3$d items)',
+									'plugin-name'
+								),
 								page,
 								totalPages,
 								total
@@ -285,10 +304,22 @@ const SecondTab = () => {
 							hideLabelFromVision
 							value={ statusFilter }
 							options={ [
-								{ label: __( 'All statuses', 'plugin-name' ), value: '' },
-								{ label: __( 'Pending', 'plugin-name' ), value: 'pending' },
-								{ label: __( 'Active', 'plugin-name' ), value: 'active' },
-								{ label: __( 'Done', 'plugin-name' ), value: 'done' },
+								{
+									label: __( 'All statuses', 'plugin-name' ),
+									value: '',
+								},
+								{
+									label: __( 'Pending', 'plugin-name' ),
+									value: 'pending',
+								},
+								{
+									label: __( 'Active', 'plugin-name' ),
+									value: 'active',
+								},
+								{
+									label: __( 'Done', 'plugin-name' ),
+									value: 'done',
+								},
 							] }
 							onChange={ handleStatusChange }
 							__next40pxDefaultSize

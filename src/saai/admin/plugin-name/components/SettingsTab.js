@@ -20,8 +20,8 @@ import apiFetch from '@wordpress/api-fetch';
 
 const SettingsTab = () => {
 	const [ settings, setSettings ] = useState( null );
-	const [ saving, setSaving ]     = useState( false );
-	const [ notice, setNotice ]     = useState( null );
+	const [ saving, setSaving ] = useState( false );
+	const [ notice, setNotice ] = useState( null );
 
 	useEffect( () => {
 		apiFetch( { path: '/plugin-name/v1/settings' } )
