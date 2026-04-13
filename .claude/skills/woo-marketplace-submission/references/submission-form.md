@@ -1,42 +1,42 @@
 # Submission Form Field Guide
 
-Vendor Dashboard の Submit Product フォーム全フィールドに対する記入ガイド。
-プラグイン情報をヒアリングした上で、各フィールドに適切な英語テキストを生成する。
+A guide for filling in all fields of the Vendor Dashboard's Submit Product form.
+Gathers information about the plugin and generates appropriate English text for each field.
 
-## 手順
+## Process
 
-### ヒアリング項目
+### Information to Gather
 
-フォーム記入テキストを生成するために、以下の情報を確認する:
+Collect the following information to generate form text:
 
-1. プラグイン名（英語）
-2. 何をするプラグインか（1文で）
-3. 主要機能（3〜5個）
-4. ターゲットユーザー
-5. なぜ作ったか / 市場にない理由
-6. 競合製品（2〜3個、WooCommerce.com内）
-7. 想定月間販売数
-8. 希望価格（年額 USD）
-9. 他のチャネルで販売しているか
-10. 対応言語
-11. 連携する他の拡張（あれば）
-12. 前提となるプラグイン（あれば）
-13. デモサイトURL
-14. ウォークスルー動画URL
+1. Plugin name (in English)
+2. What the plugin does (in one sentence)
+3. Core features (3–5)
+4. Target users
+5. Why it was built / the gap in the market
+6. Competitor products (2–3, within WooCommerce.com)
+7. Expected monthly sales volume
+8. Desired price (annual price in USD)
+9. Whether it is sold on other channels
+10. Supported languages
+11. Other extensions it integrates with (if any)
+12. Prerequisite plugins (if any)
+13. Demo site URL
+14. Walkthrough video URL
 
 ---
 
-## Product Details セクション
+## Product Details Section
 
-### Name（4〜60文字、必須）
+### Name (4–60 characters, required)
 
-ルール:
-- 4〜60文字
-- アクセント文字（é, ü 等）を使わない
-- 既存のマーケットプレイス製品名と重複しない
-- WooCommerce等の商標ガイドラインに準拠
+Rules:
+- 4–60 characters
+- No accent characters (é, ü, etc.)
+- Must not duplicate an existing marketplace product name
+- Must comply with WooCommerce and other trademark guidelines
 
-良い例:
+Good examples:
 ```
 Token Expiry Notifier
 Advanced Shipping Labels
@@ -44,18 +44,18 @@ Order Fulfillment Tracker
 Bulk Price Editor
 ```
 
-悪い例:
+Bad examples:
 ```
-❌ WooCommerce Token Plugin        → 商標「WooCommerce」を冠にしない
-❌ BestShop Pro Notification Tool  → ブランド名が前面に出すぎ
-❌ Plugin                          → 4文字未満 / 汎用的すぎる
-❌ Tökën Nötifier                  → アクセント文字
+❌ WooCommerce Token Plugin        → Do not lead with the "WooCommerce" trademark
+❌ BestShop Pro Notification Tool  → Brand name is too prominent
+❌ Plugin                          → Under 4 characters / too generic
+❌ Tökën Nötifier                  → Accent characters
 ```
 
-### Category（必須）
+### Category (required)
 
-マーケットプレイスのカテゴリから最も適切なものを1つ選択。
-主な選択肢:
+Select the single most appropriate category from the marketplace options.
+Main choices:
 - Customer service
 - Marketing
 - Payments
@@ -67,16 +67,16 @@ Bulk Price Editor
 - Store content and customizations
 - Subscriptions and memberships
 
-### Product short description（140文字以内、必須）
+### Product short description (up to 140 characters, required)
 
-製品タグラインとして表示される。Google検索結果にも使われる。
+Displayed as the product tagline. Also used in Google search results.
 
-テンプレート:
+Template:
 ```
-[動詞] [対象] when/for [条件/ユースケース].
+[Verb] [object] when/for [condition/use case].
 ```
 
-例:
+Examples:
 ```
 Notify customers when their saved payment tokens are about to expire.
 ```
@@ -87,31 +87,31 @@ Automatically generate and print shipping labels for major carriers.
 Let customers schedule delivery dates at checkout.
 ```
 
-ルール:
-- 1文で完結
-- 140文字以内
-- 動詞から始めると強い印象
-- 技術用語よりベネフィットを優先
-- ピリオドで終える
+Rules:
+- Complete in one sentence
+- Up to 140 characters
+- Starting with a verb creates a strong impression
+- Prioritize benefits over technical terminology
+- End with a period
 
 ---
 
-## Business Details セクション
+## Business Details Section
 
-### List your product's 3-5 best features（必須）
+### List your product's 3-5 best features (required)
 
-箇条書きで3〜5個。各項目は1〜2文で機能とベネフィットを簡潔に。
+Bullet list of 3–5 items. Each item briefly describes the feature and its benefit in 1–2 sentences.
 
-テンプレート:
+Template:
 ```
-1. [機能名] — [マーチャントにとってのベネフィット]
-2. [機能名] — [マーチャントにとってのベネフィット]
-3. [機能名] — [マーチャントにとってのベネフィット]
-4. [機能名] — [マーチャントにとってのベネフィット]
-5. [機能名] — [マーチャントにとってのベネフィット]
+1. [Feature name] — [Benefit to merchants]
+2. [Feature name] — [Benefit to merchants]
+3. [Feature name] — [Benefit to merchants]
+4. [Feature name] — [Benefit to merchants]
+5. [Feature name] — [Benefit to merchants]
 ```
 
-例（Token Expiry Notifier の場合）:
+Example (for Token Expiry Notifier):
 ```
 1. Automatic email notifications — Customers receive timely alerts
    before their saved payment tokens expire, reducing failed renewals.
@@ -125,24 +125,24 @@ Let customers schedule delivery dates at checkout.
    stores with full HPOS and block-based checkout support.
 ```
 
-### What are the product benefits?（必須）
+### What are the product benefits? (required)
 
-機能ではなくビジネス上のベネフィットを記述。マーチャントの視点で
-「これを使うと何が良くなるか」を説明する。
+Describe business benefits rather than features. From the merchant's perspective,
+explain "what improves when you use this."
 
-テンプレート:
+Template:
 ```
-[製品名] helps store owners [主要ベネフィット] by [手段].
+[Product Name] helps store owners [primary benefit] by [means].
 
 Key benefits:
-- [ベネフィット1]: [具体的な効果]
-- [ベネフィット2]: [具体的な効果]
-- [ベネフィット3]: [具体的な効果]
+- [Benefit 1]: [Specific outcome]
+- [Benefit 2]: [Specific outcome]
+- [Benefit 3]: [Specific outcome]
 
-This results in [最終的なビジネスインパクト].
+This results in [ultimate business impact].
 ```
 
-例:
+Example:
 ```
 Token Expiry Notifier helps store owners reduce involuntary churn
 and failed subscription renewals by proactively alerting customers
@@ -160,30 +160,30 @@ This results in higher subscription retention rates and more
 predictable recurring revenue for store owners.
 ```
 
-### Why was this product built? What is the supporting rationale?（必須）
+### Why was this product built? What is the supporting rationale? (required)
 
-審査チームはここで市場ニーズと製品の妥当性を判断する。
-以下の3点を含める:
+The review team uses this section to judge market need and product validity.
+Include all three of the following:
 
-1. **問題の特定**: 市場にどんなギャップがあるか
-2. **根拠**: フォーラム投稿、機能リクエスト、顧客の声、市場データ
-3. **ソリューション**: この製品がどうその問題を解決するか
+1. **Problem identification**: What gap exists in the market
+2. **Evidence**: Forum posts, feature requests, customer feedback, market data
+3. **Solution**: How this product addresses the problem
 
-テンプレート:
+Template:
 ```
 Problem:
-[具体的な市場の問題を2〜3文で]
+[2–3 sentences describing the specific market problem]
 
 Evidence:
-- [根拠1: フォーラムリンク、機能リクエスト数、顧客フィードバック等]
-- [根拠2]
-- [根拠3]
+- [Evidence 1: forum links, feature request count, customer feedback, etc.]
+- [Evidence 2]
+- [Evidence 3]
 
 Solution:
-[この製品がどう問題を解決するかを2〜3文で]
+[2–3 sentences on how this product solves the problem]
 ```
 
-例:
+Example:
 ```
 Problem:
 WooCommerce stores using saved payment methods (tokenization) have
@@ -206,98 +206,97 @@ before expiry. This gives customers time to update their payment
 details, preventing failed charges and reducing churn.
 ```
 
-注意: WooCommerceの公式ガイドラインに記載されている通り、
-「feature requests, mention custom customers or number of interactions
-with prospective customers (forums, social media, support), and showcase trends」
-を含めること。
+Note: As stated in WooCommerce's official guidelines, include
+"feature requests, mention custom customers or number of interactions
+with prospective customers (forums, social media, support), and showcase trends."
 
 ### How many monthly sales do you anticipate?
 
-正直な数字を記入。過大な数字は信頼性を下げる。
+Enter an honest number. Inflated figures reduce credibility.
 
-目安:
-- ニッチなプラグイン: 5–20/月
-- 中程度の需要: 20–50/月
-- 広い需要: 50–200/月
+Reference ranges:
+- Niche plugin: 5–20/month
+- Moderate demand: 20–50/month
+- Broad demand: 50–200/month
 
-例:
+Example:
 ```
 15-30 sales per month initially, growing to 50+ as the product
 gains reviews and marketplace visibility.
 ```
 
-### How does your product compare to similar products?（必須）
+### How does your product compare to similar products? (required)
 
-2〜3個の競合製品と比較。マーケットプレイス内外の製品を含めてよい。
-自社製品の強みを客観的に説明する。
+Compare with 2–3 competitor products. May include products inside and outside the marketplace.
+Describe your product's strengths objectively.
 
-テンプレート:
+Template:
 ```
 Currently, there is no direct equivalent on the WooCommerce
-Marketplace that specifically addresses [機能].
+Marketplace that specifically addresses [feature].
 
 The closest alternatives are:
 
-1. [競合A] ($XX/year) — [何をするか]. However, [差別化ポイント].
-2. [競合B] ($XX/year) — [何をするか]. However, [差別化ポイント].
+1. [Competitor A] ($XX/year) — [What it does]. However, [differentiator].
+2. [Competitor B] ($XX/year) — [What it does]. However, [differentiator].
 
-[製品名] differentiates by [独自の価値提案].
+[Product Name] differentiates by [unique value proposition].
 ```
 
 ---
 
-## Pricing セクション
+## Pricing Section
 
-### Suggested price（必須）
+### Suggested price (required)
 
-ドロップダウンから選択（$75, $99, $149, $199, $249 等）。
+Select from the dropdown ($75, $99, $149, $199, $249, etc.).
 
-選択の根拠をスキルの価格フレームワークで算出する。
-自社サイトで販売している場合はその価格以下にする。
+Use the skill's pricing framework to calculate the basis for your selection.
+If selling on your own site, the marketplace price must be equal to or lower.
 
-### Is this product sold elsewhere?（必須）
+### Is this product sold elsewhere? (required)
 
-他のチャネル（自社サイト、他マーケットプレイス等）で販売している場合は
-「Yes」を選択し、URLと価格を記入。
+If selling on other channels (your own site, other marketplaces, etc.), select "Yes"
+and enter the URL and price.
 
-マーケットプレイス価格 ≤ 他チャネル価格のルールを遵守。
-
----
-
-## Languages セクション
-
-対応言語を選択。最低限 English (United States) を含める。
-日本市場向けの場合は Japanese も追加。
+Comply with the rule: marketplace price ≤ other channel price.
 
 ---
 
-## Integrations and requirements セクション
+## Languages Section
+
+Select supported languages. Include at minimum English (United States).
+Add Japanese for products targeting the Japanese market.
+
+---
+
+## Integrations and requirements Section
 
 ### Products with which your product offers special integration
 
-連携する他のWooCommerce拡張があれば選択。
-例: WooCommerce Subscriptions, WooCommerce Payments
+Select any other WooCommerce extensions your product integrates with.
+Examples: WooCommerce Subscriptions, WooCommerce Payments
 
 ### Other WooCommerce.com product(s) that needs to be activated
 
-前提となるマーケットプレイス製品があれば記入。
-依存関係がない場合は空欄。
+Enter any prerequisite marketplace products.
+Leave blank if there are no dependencies.
 
 ### WordPress.org plugin slugs
 
-前提となるWordPress.orgプラグインのスラッグを記入。
-例: `hello-dolly, akismet`
-依存関係がない場合は空欄（"Leave blank if none"）。
+Enter the slugs of any required WordPress.org plugins.
+Example: `hello-dolly, akismet`
+Leave blank if there are no dependencies ("Leave blank if none").
 
 ---
 
-## Testing セクション
+## Testing Section
 
-### Provide instructions on how to install, configure, and use the product（必須）
+### Provide instructions on how to install, configure, and use the product (required)
 
-審査チームがテストする手順。明確で再現可能な手順を記述。
+Steps for the review team to test. Provide clear, reproducible instructions.
 
-テンプレート:
+Template:
 ```
 Installation:
 1. Upload the ZIP file via WordPress Admin > Plugins > Add New > Upload Plugin
@@ -324,50 +323,50 @@ Admin features:
 2. [What to look for]
 ```
 
-### Walkthrough video（必須）
+### Walkthrough video (required)
 
-審査チーム専用（一般公開されない）。YouTube/Vimeo/Loom の限定公開URLを記入。
+For the review team only (not publicly visible). Enter an unlisted YouTube/Vimeo/Loom URL.
 
-内容:
-- インストールとアクティベーション（30秒）
-- 設定画面のウォークスルー（1〜2分）
-- 主要機能のデモ（2〜3分）
-- 合計3〜5分程度
+Content:
+- Installation and activation (30 seconds)
+- Walkthrough of settings screens (1–2 minutes)
+- Demo of key features (2–3 minutes)
+- Total: approximately 3–5 minutes
 
-例:
+Example:
 ```
 https://www.loom.com/share/xxxxxxxxxxxx
 ```
 
-### Demo site URL（必須）
+### Demo site URL (required)
 
-審査チームが実際に操作できるデモ環境のURL。
+URL of a demo environment where the review team can interact with the product directly.
 
-例:
+Example:
 ```
 https://demo.your-domain.com/
 ```
 
-InstaWP を使う場合:
+Using InstaWP:
 ```
 https://your-demo.instawp.xyz/
 ```
 
 ### Testing data URL
 
-テスト用のインポートデータがある場合にURLを記入。
-なければ空欄可。
+Enter a URL if you have importable test data to provide.
+May be left blank if not applicable.
 
-例:
+Example:
 ```
 https://your-domain.com/test-data/sample-orders.csv
 ```
 
 ### Testing login credentials
 
-デモサイトのログイン情報。
+Login credentials for the demo site.
 
-例:
+Example:
 ```
 Admin: https://demo.your-domain.com/wp-admin/
 Username: reviewer
@@ -380,31 +379,31 @@ Password: TestCustomer123!
 
 ---
 
-## Product Upload セクション
+## Product Upload Section
 
-### Product slug（必須）
+### Product slug (required)
 
-プラグインのディレクトリ名と一致させる。一度設定すると変更不可。
+Must match the plugin's directory name. Cannot be changed once set.
 
-ルール:
-- 全て小文字
-- ハイフン区切り（アンダースコア不可）
-- 簡潔で機能を表す
+Rules:
+- All lowercase
+- Hyphen-separated (no underscores)
+- Short and descriptive of the feature
 
-例:
+Example:
 ```
 token-expiry-notifier
 ```
 
 ### Currently listed on WordPress.org
 
-WordPress.orgに無料版がある場合はチェック。
-チェックすると一部フィールドが自動入力される。
+Check this if a free version exists on WordPress.org.
+Some fields will be auto-populated when checked.
 
 ### Zip file
 
-Product slug 入力後にアップロード可能。30MB以下。
-ZIPのファイル名とルートディレクトリ名がProduct slugと一致すること。
+Can be uploaded after entering the product slug. 30MB maximum.
+The ZIP filename and root directory name must match the product slug.
 
 ```
 token-expiry-notifier.zip
@@ -416,15 +415,15 @@ token-expiry-notifier.zip
 
 ---
 
-## Additional Information セクション
+## Additional Information Section
 
 ### Notes for reviewers
 
-審査チームへの補足情報。以下を含めると審査がスムーズ:
+Supplementary information for the review team. Including the following makes the review smoother:
 
-テンプレート:
+Template:
 ```
-Thank you for reviewing [製品名].
+Thank you for reviewing [Product Name].
 
 Key points for review:
 - This extension is fully HPOS-compatible and declares
@@ -433,7 +432,7 @@ Key points for review:
   Blocks integration class.
 - All settings are located under WooCommerce > Settings > [Tab],
   no top-level menu items are created.
-- [その他の審査で気になりそうなポイントへの回答]
+- [Answers to other points likely to come up during review]
 
 If you have any questions during the review, please don't
 hesitate to reach out. I'm happy to provide additional
@@ -442,64 +441,64 @@ information or make adjustments.
 
 ---
 
-## 出力フォーマット
+## Output Format
 
-全フィールドの記入テキストを以下の形式でまとめて出力する:
+Output all field text in the following format:
 
 ```
 === WooCommerce Marketplace Submission Form ===
-Plugin: [プラグイン名]
-Generated: [日付]
+Plugin: [Plugin name]
+Generated: [Date]
 
 ─── Product Details ───
-Name: [記入テキスト]
-Category: [選択値]
-Short description: [記入テキスト]
+Name: [Text]
+Category: [Selection]
+Short description: [Text]
 
 ─── Business Details ───
 Best features:
-[記入テキスト]
+[Text]
 
 Benefits:
-[記入テキスト]
+[Text]
 
 Rationale:
-[記入テキスト]
+[Text]
 
-Monthly sales estimate: [記入テキスト]
+Monthly sales estimate: [Text]
 
 Competitive comparison:
-[記入テキスト]
+[Text]
 
 ─── Pricing ───
 Suggested price: $[XX]
-Sold elsewhere: [Yes/No + 詳細]
+Sold elsewhere: [Yes/No + details]
 
 ─── Languages ───
-[選択言語リスト]
+[List of selected languages]
 
 ─── Integrations ───
-Special integrations: [記入テキスト or N/A]
-Required WooCommerce.com products: [記入テキスト or N/A]
-Required WordPress.org plugins: [記入テキスト or N/A]
+Special integrations: [Text or N/A]
+Required WooCommerce.com products: [Text or N/A]
+Required WordPress.org plugins: [Text or N/A]
 
 ─── Testing ───
 Install/configure instructions:
-[記入テキスト]
+[Text]
 
 Walkthrough video: [URL]
 Demo site URL: [URL]
 Testing data URL: [URL or N/A]
 Login credentials:
-[記入テキスト]
+[Text]
 
 ─── Product Upload ───
-Product slug: [スラッグ]
+Product slug: [Slug]
 Listed on WordPress.org: [Yes/No]
 
 ─── Additional ───
 Notes for reviewers:
-[記入テキスト]
+[Text]
 
 === END ===
 ```

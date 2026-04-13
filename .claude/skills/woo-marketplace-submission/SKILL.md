@@ -1,63 +1,68 @@
 ---
 name: woo-marketplace-submission
 description: >
-  WooCommerce.com Marketplaceへのプラグイン提出から審査通過、リリース後の継続運用までをカバーするスキル。
-  Vendor Dashboard の Submit Product フォーム全フィールド（Name, Short description, Best features,
-  Benefits, Rationale, Competitive comparison, Testing instructions, Notes for reviewers 等）への
-  適切な英語テキスト生成、提出パッケージの準備（ZIP命名、changelog形式、バージョン整合性）、3段階の審査プロセス
-  （ビジネス/コード/UX）の対応戦略、価格設定ルール（70/30収益分配、SaaS Billing API）、Freemiumモデル構成、
-  リリース後のアップデート義務（最低6ヶ月、四半期メジャー推奨）、ドキュメント要件を網羅する。
-  「マーケットプレイス提出」「Woo提出」「審査対応」「Vendor Dashboard」「提出フォーム」「Submit Product」
-  「価格設定」「収益分配」「Freemium」「アップデート義務」「商標ガイドライン」「SaaS Billing」
-  「提出フォームの英語」「申請フォーム」といったキーワードが出た場合に使用する。
-  WooCommerceプラグインの販売戦略やビジネスモデル設計、提出フォームの記入について相談された場合にも積極的に参照すること。
+  Skill covering everything from submitting a plugin to the WooCommerce.com Marketplace through
+  passing review to ongoing post-release operations. Covers generating appropriate English text for
+  all Vendor Dashboard Submit Product form fields (Name, Short description, Best features,
+  Benefits, Rationale, Competitive comparison, Testing instructions, Notes for reviewers, etc.),
+  preparing the submission package (ZIP naming, changelog format, version consistency), strategies
+  for the three-stage review process (Business / Code / UX), pricing rules (70/30 revenue split,
+  SaaS Billing API), Freemium model configuration, post-release update obligations (minimum every
+  6 months, quarterly major releases recommended), and documentation requirements.
+  Use when keywords like "marketplace submission", "submit to Woo", "review process",
+  "Vendor Dashboard", "submission form", "Submit Product", "pricing", "revenue split",
+  "Freemium", "update obligations", "trademark guidelines", "SaaS Billing",
+  "submission form text", or "application form" appear. Also reference proactively when
+  consulting on sales strategy, business model design, or filling out the submission form for
+  a WooCommerce plugin.
 ---
 
 # WooCommerce Marketplace Submission & Operations
 
-Vendor登録が完了した後の、製品提出から審査通過、リリース後の運用までの全プロセスを解説する。
+This document explains the full process from product submission to passing review and
+post-release operations, starting after Vendor registration is complete.
 
 ---
 
-## 提出フォーム記入テキストの生成
+## Generating Submission Form Text
 
-Vendor Dashboard の Submit Product フォームの全フィールドに対して、
-プラグイン情報をヒアリングした上で、審査に通りやすい適切な英語テキストを生成する。
+For all fields in the Vendor Dashboard's Submit Product form, gather information about the
+plugin and generate appropriate English text that is likely to pass review.
 
-Product Details（Name, Category, Short description）、Business Details（Best features,
-Benefits, Rationale, Monthly sales, Competitive comparison）、Pricing、Languages、
-Integrations、Testing（Instructions, Video, Demo URL, Credentials）、
-Product Upload（Slug）、Notes for reviewers の全セクションをカバー。
+Covers all sections: Product Details (Name, Category, Short description), Business Details
+(Best features, Benefits, Rationale, Monthly sales, Competitive comparison), Pricing,
+Languages, Integrations, Testing (Instructions, Video, Demo URL, Credentials),
+Product Upload (Slug), and Notes for reviewers.
 
-使い方: 「提出フォームの記入内容を作って」「Submit Productの英語を書いて」と指示する。
+Usage: Ask "write the submission form content" or "write the Submit Product English text."
 
 See: `references/submission-form.md`
 
 ---
 
-## 提出パッケージの準備
+## Preparing the Submission Package
 
-### ZIP ファイル要件
+### ZIP File Requirements
 
-WooCommerce.com はアップロードされたZIPファイルの名前とフォルダ構造を検証する。
+WooCommerce.com validates the name and folder structure of the uploaded ZIP file.
 
 ```
 my-extension.zip
-└── my-extension/           # ディレクトリ名 = プラグインスラッグ
-    ├── my-extension.php    # メインファイル名 = ディレクトリ名
-    ├── changelog.txt       # 必須
+└── my-extension/           # Directory name = plugin slug
+    ├── my-extension.php    # Main file name = directory name
+    ├── changelog.txt       # Required
     ├── readme.txt
     ├── includes/
-    ├── build/              # ビルド済みJS/CSS（ソースマップは除外）
+    ├── build/              # Compiled JS/CSS (exclude source maps)
     ├── assets/
     ├── languages/
     └── ...
 ```
 
-Vendor Dashboard でアップロードすると、期待されるZIPファイル名が表示される。
-この名前と一致しない場合はアップロードエラーになる。
+After uploading in the Vendor Dashboard, the expected ZIP filename is shown.
+An upload error will occur if the filename does not match.
 
-### ZIP 作成の自動化
+### Automating ZIP Creation
 
 ```bash
 #!/bin/bash
@@ -66,12 +71,12 @@ Vendor Dashboard でアップロードすると、期待されるZIPファイル
 PLUGIN_SLUG="my-extension"
 VERSION=$(grep "Version:" "${PLUGIN_SLUG}.php" | awk '{print $NF}')
 
-# ビルド
+# Build
 npm ci
 npm run build
 composer install --no-dev --optimize-autoloader
 
-# ZIP作成（不要ファイルを除外）
+# Create ZIP (exclude unnecessary files)
 zip -r "${PLUGIN_SLUG}.zip" . \
   -x ".git/*" \
   -x ".github/*" \
@@ -92,7 +97,7 @@ zip -r "${PLUGIN_SLUG}.zip" . \
 echo "Created ${PLUGIN_SLUG}.zip (v${VERSION})"
 ```
 
-### changelog.txt のフォーマット
+### changelog.txt Format
 
 ```
 *** My Extension Changelog ***
@@ -110,149 +115,149 @@ echo "Created ${PLUGIN_SLUG}.zip (v${VERSION})"
 * Feature - Initial release
 ```
 
-エントリタイプ: `Feature`, `Tweak`, `Fix`, `Dev`, `Update`
+Entry types: `Feature`, `Tweak`, `Fix`, `Dev`, `Update`
 
-バージョン番号が以下の3箇所で全て一致している必要がある:
-1. プラグインヘッダーの `Version:` フィールド
-2. `changelog.txt` の最新エントリ
-3. アップロード時に入力するバージョン番号
+The version number must match in all three of the following locations:
+1. The `Version:` field in the plugin header
+2. The latest entry in `changelog.txt`
+3. The version number entered at upload time
 
-不一致があるとアップロードエラーになる。
+A mismatch in any of these will cause an upload error.
 
 ---
 
-## 審査プロセス
+## Review Process
 
-提出後、3段階の審査を通過する必要がある:
+After submission, the plugin must pass three stages of review:
 
-### 1. 自動テスト（即時）
+### 1. Automated Tests (Immediate)
 
-提出すると QIT が自動で以下のテストを実行する:
+Upon submission, QIT automatically runs the following tests:
 - Activation Test
 - Security Test
 - Malware Test
 
-これらに通過しないとレビューキューに入れない。
-失敗した場合は Vendor Dashboard の Submission progress タブに結果が表示される。
+The plugin cannot enter the review queue unless these pass.
+If they fail, results appear in the Submission progress tab of the Vendor Dashboard.
 
-QIT テスト結果のリンクは一時的な署名付きURLであり、期限切れになることがある。
-新しい結果が必要な場合はテストを再実行する。
+QIT test result links are temporary signed URLs and may expire.
+Re-run the tests to get fresh results when needed.
 
-### 2. ビジネスレビュー（正式決定まで最大30日）
+### 2. Business Review (Up to 30 days for a decision)
 
-審査チームが以下を評価する:
+The review team evaluates the following:
 
-**収益分配モデル**: マーケットプレイスは70/30の収益分配（ベンダー70%、Woo 30%）。
-製品が収益を共有する構造になっているか確認される。
+**Revenue sharing model**: The marketplace uses a 70/30 revenue split (vendor 70%, Woo 30%).
+Reviewers confirm the product is structured to share revenue properly.
 
-**価格設定**: マーケットプレイスでの価格は、他の販売チャネル（自社サイト等）での
-価格以下でなければならない。自社サイトで$99なら、マーケットプレイスも$99以下。
+**Pricing**: The marketplace price must be equal to or less than prices on other sales
+channels (your own site, etc.). If your site charges $99, the marketplace must also be $99 or less.
 
-**商標ガイドライン**: プラグイン名がWooの商標ガイドラインに違反していないか。
-「WooCommerce」をプラグイン名に含める場合のルールに注意する。
+**Trademark guidelines**: Whether the plugin name violates Woo trademark guidelines.
+Pay attention to the rules around including "WooCommerce" in the plugin name.
 
-**製品の独自性**: 既存のマーケットプレイス製品と過度に重複しないか。
-差別化要因が明確か。
+**Product uniqueness**: Whether the product overlaps too heavily with existing marketplace
+products. Differentiation must be clearly evident.
 
-**禁止事項**:
-- マーケットプレイス外へのアップセルリンク
-- アフィリエイトリンク
-- スパムリンク
-- 他のマーケットプレイスへの誘導
+**Prohibited practices**:
+- Upsell links to sites outside the marketplace
+- Affiliate links
+- Spam links
+- Redirecting to other marketplaces
 
-### 3. コードレビュー
+### 3. Code Review
 
-提出コードのオリジナリティ、セキュリティ、WordPress/WooCommerce品質基準への準拠を確認:
+Verifies code originality, security, and compliance with WordPress/WooCommerce quality standards:
 
-- コードがオリジナルであること
-- セキュリティベストプラクティスに準拠
-- WordPress / WooCommerce コーディングスタンダード準拠
-- HPOS 互換性
-- 適切なデータバリデーション/サニタイズ
+- Code must be original
+- Follows security best practices
+- Complies with WordPress / WooCommerce coding standards
+- HPOS compatibility
+- Proper data validation and sanitization
 
-### 4. UXレビュー
+### 4. UX Review
 
-2024年以降、UXレビューが審査に追加され、審査期間が長くなっている。
+Since 2024, a UX review has been added to the process, lengthening review timelines.
 
-確認項目:
-- 製品のクリティカルフローが正しく動作するか
-- UXガイドラインに準拠しているか（メニュー配置、UIコンポーネント、レスポンシブ等）
-- セットアップフローが直感的か
-- アクセシビリティ対応
-- WooCommerce のルック&フィールと整合しているか
+Checked items:
+- Critical flows of the product work correctly
+- Complies with UX guidelines (menu placement, UI components, responsiveness, etc.)
+- Setup flow is intuitive
+- Accessibility support
+- Consistent with the WooCommerce look and feel
 
-UXレビューを迅速に通過するためのポイント:
-- 事前に自社でクリティカルフローのテストを徹底する
-- WooCommerce Core のクリティカルフロー定義を参考にする
-- 既存の WordPress/WooCommerce UIコンポーネントを最大限活用する
+Tips for passing the UX review quickly:
+- Thoroughly test your own critical flows before submitting
+- Reference the WooCommerce Core critical flow definitions
+- Make maximum use of existing WordPress/WooCommerce UI components
 
-### フィードバック対応
+### Handling Feedback
 
-審査中にフィードバックが返ってくる場合がある:
-- Vendor Dashboard の Submission progress タブでフィードバックを確認
-- 修正後に再提出（ステータスが "Changes required" の場合のみZIP差し替え可能）
-- 他のステータスの場合はコメントでステータス変更を依頼する
-- 以前のフィードバックを全て反映した上で再提出すること
+Feedback may be returned during review:
+- Check feedback in the Submission progress tab of the Vendor Dashboard
+- After making fixes, resubmit (ZIP replacement is only allowed when status is "Changes required")
+- For other statuses, request a status change via comment
+- Ensure all previous feedback has been addressed before resubmitting
 
 ---
 
-## 価格設定とビジネスモデル
+## Pricing and Business Model
 
-### 収益分配
+### Revenue Split
 
-- ベンダー: 70%
+- Vendor: 70%
 - WooCommerce: 30%
 
-### 価格戦略
+### Pricing Strategy
 
-**年間サブスクリプション（標準モデル）**:
-マーケットプレイスの標準的な価格モデル。年間ライセンスでサポートとアップデートを提供。
+**Annual Subscription (standard model)**:
+The standard pricing model on the marketplace. Provide support and updates under an annual license.
 
-**月額サブスクリプション**:
-月額の場合は SaaS Billing API の実装が必須。APIキーとサンドボックスアクセスは
-製品提出後に手動で付与される。
+**Monthly Subscription**:
+For monthly pricing, implementing the SaaS Billing API is required. API keys and sandbox
+access are granted manually after product submission.
 
 ```
-月額サブスクリプションの場合:
-→ SaaS Billing API 実装が必須
-→ APIキー/サンドボックスは提出後に付与
-→ 年額より月額の方が1ユーザーあたりの総支払額は高くなるよう設計
+For monthly subscriptions:
+→ SaaS Billing API implementation is required
+→ API key/sandbox granted after submission
+→ Design so the total amount paid monthly exceeds the annual price per user
 ```
 
-**ティアード価格（標準、プロ、エンタープライズ等）**:
-機能制限やサイト数で差別化する場合、各ティアは個別のプラグインファイルか
-ライセンスキーによる機能制御で実装する。
+**Tiered Pricing (Standard, Pro, Enterprise, etc.)**:
+When differentiating by feature limits or site count, each tier is implemented either as a
+separate plugin file or via license-key-based feature control.
 
-### 他チャネルとの価格整合
+### Price Alignment with Other Channels
 
-マーケットプレイスでの価格 ≤ 他チャネルでの価格
+Marketplace price ≤ price on other channels
 
-自社サイトでも販売する場合は、マーケットプレイスの価格以下にはできない。
-マーケットプレイスを最安チャネルにするか、同一価格にする。
+If also selling on your own site, the marketplace price cannot be higher.
+Either make the marketplace the cheapest channel or use identical pricing.
 
 ---
 
-## Freemium モデル
+## Freemium Model
 
-無料版（WordPress.org）と有料版（WooCommerce.com）の組み合わせ。
+A combination of a free version (WordPress.org) and a paid version (WooCommerce.com).
 
-### 提出の流れ
+### Submission Flow
 
-Freemium の場合、2つの別々の提出が必要:
+For Freemium, two separate submissions are required:
 
-1. **無料版**: WordPress.org プラグインディレクトリに提出
-2. **有料版**: WooCommerce.com マーケットプレイスに提出
+1. **Free version**: Submit to the WordPress.org plugin directory
+2. **Paid version**: Submit to the WooCommerce.com marketplace
 
-それぞれ独立したレビュープロセスを通過する。
+Each goes through an independent review process.
 
-### 設計パターン
+### Design Pattern
 
 ```php
-// 無料版のメインファイル
-// 基本機能を提供、Pro版への自然な導線
+// Free version main file
+// Provides basic functionality, natural upgrade path to Pro
 
 if ( ! defined( 'MY_EXTENSION_PRO' ) ) {
-    // 無料版の機能制限表示
+    // Display feature limitation notice in free version
     add_action( 'my_extension_settings_after', function() {
         echo '<div class="my-extension-upgrade-notice">';
         printf(
@@ -268,88 +273,88 @@ if ( ! defined( 'MY_EXTENSION_PRO' ) ) {
 ```
 
 ```php
-// 有料版のメインファイル
-// 無料版を含む or 完全に別プラグインとして独立
+// Pro version main file
+// Either includes the free version or is fully standalone
 define( 'MY_EXTENSION_PRO', true );
 
-// Pro機能の読み込み
+// Load Pro features
 require_once plugin_dir_path( __FILE__ ) . 'includes/pro/class-pro-features.php';
 ```
 
-### 注意点
+### Important Notes
 
-- 無料版からのアップセル導線はマーケットプレイス内のURLのみ許可
-- 外部サイトへのアフィリエイトリンクやトラッキングリンクは禁止
-- 無料版に過度な広告/バナーを表示しない
-- 無料版だけでも実用的な価値を提供すること
-
----
-
-## 提出手順（Vendor Dashboard）
-
-1. Vendor Dashboard にログイン
-2. **Submissions > Submit Product** に移動
-3. 製品タイプを選択（Extension / Theme / Integration）
-4. 製品情報を入力:
-   - プラグイン名（商標ガイドライン準拠）
-   - 説明文
-   - カテゴリ
-   - 価格設定
-   - スクリーンショット / デモ動画
-   - デモサイトURL（審査チームがUXを確認するため重要）
-   - テスト手順（審査チームへの指示）
-5. ZIP ファイルをアップロード
-6. 提出
-
-### デモ環境の準備
-
-審査チームが製品を実際に操作してUXを確認するため、デモ環境を用意する:
-
-- WooCommerce + 製品がインストール済みの状態
-- テストデータ（商品、注文等）が入った状態
-- 管理者アカウント情報の提供
-- wp-env や InstaWP を使ったデモ環境が便利
+- Upsell links from the free version are only allowed to marketplace URLs
+- External affiliate links or tracking links are prohibited
+- Do not display excessive ads/banners in the free version
+- The free version alone should provide practical value
 
 ---
 
-## リリース後の運用
+## Submission Procedure (Vendor Dashboard)
 
-### アップデート義務
+1. Log in to the Vendor Dashboard
+2. Navigate to **Submissions > Submit Product**
+3. Select the product type (Extension / Theme / Integration)
+4. Enter product information:
+   - Plugin name (compliant with trademark guidelines)
+   - Description
+   - Category
+   - Pricing
+   - Screenshots / demo video
+   - Demo site URL (important — the review team uses this to verify UX)
+   - Testing instructions (directions for the review team)
+5. Upload the ZIP file
+6. Submit
 
-マーケットプレイスに掲載された製品には継続的なメンテナンスが求められる:
+### Setting Up a Demo Environment
 
-- **最低6ヶ月ごとのアップデート**: 更新が6ヶ月以上ない製品は掲載取り下げの対象
-- **四半期メジャーリリース推奨**: WooCommerce Core のリリースカレンダーと同期
-- **セキュリティ修正**: 必要に応じて緊急リリース
-- **マイナー改善**: 月次または機能/修正の準備ができ次第
+The review team will interact with the product directly to verify UX, so prepare a demo environment:
 
-### バージョンアップロードの流れ
+- WooCommerce + product installed and active
+- Populated with test data (products, orders, etc.)
+- Administrator account credentials provided
+- wp-env or InstaWP work well for demo environments
 
-1. QIT 全テスト通過を確認（Vendor Dashboard の Quality Insights メニュー）
-2. Vendor Dashboard の **Versions** タブに移動
-3. 新バージョンの ZIP をアップロード
-4. 自動テスト（Activation / Security / Malware）が実行される
-5. テスト通過後、自動的にデプロイされる
+---
 
-アップロード時のエラー原因:
-- ZIPファイル名の不一致
-- `changelog.txt` の欠如または不正フォーマット
-- changelog のフォーマットが無効
-- バージョンヘッダーとアップロード時のバージョンの不一致
-- ヘッダーと `changelog.txt` のバージョン不一致
+## Post-Release Operations
 
-### WooCommerce Core リリースへの追従
+### Update Obligations
 
-WooCommerce はおよそ四半期ごとにメジャーリリースを行う。
-新バージョンのリリース前にベータ/RC版でテストし、互換性を確認する:
+Listed products require ongoing maintenance:
+
+- **Updates at least every 6 months**: Products with no updates for 6+ months are subject to delisting
+- **Quarterly major releases recommended**: Align with WooCommerce Core's release calendar
+- **Security fixes**: Emergency releases as needed
+- **Minor improvements**: Monthly or as soon as features/fixes are ready
+
+### Version Upload Process
+
+1. Confirm all QIT tests pass (via the Quality Insights menu in the Vendor Dashboard)
+2. Navigate to the **Versions** tab in the Vendor Dashboard
+3. Upload the new version ZIP
+4. Automated tests (Activation / Security / Malware) run automatically
+5. After passing, the update is deployed automatically
+
+Common upload error causes:
+- ZIP filename mismatch
+- Missing or incorrectly formatted `changelog.txt`
+- Invalid changelog format
+- Mismatch between version header and version entered at upload
+- Mismatch between header and `changelog.txt` version
+
+### Staying Current with WooCommerce Core Releases
+
+WooCommerce releases approximately one major version per quarter.
+Test against beta/RC versions before each new release to confirm compatibility:
 
 ```bash
-# ベータ版でのテスト
+# Testing against the beta release
 ./vendor/bin/qit run:e2e my-extension \
   --zip=./my-extension.zip \
   --woocommerce_version=rc
 
-# または wp-env で指定
+# Or specify in wp-env
 # .wp-env.override.json
 {
   "plugins": [
@@ -359,81 +364,81 @@ WooCommerce はおよそ四半期ごとにメジャーリリースを行う。
 }
 ```
 
-### サポート
+### Support
 
-マーケットプレイスベンダーは購入者へのサポートを提供する義務がある:
-- WooCommerce.com のヘルプデスク経由でチケットが来る
-- 24時間以内の初回応答を目標
-- ドキュメントを充実させてセルフサービスの割合を上げる
+Marketplace vendors are obligated to provide support to buyers:
+- Tickets arrive via the WooCommerce.com helpdesk
+- Aim for a first response within 24 hours
+- Build out documentation to increase self-service rates
 
 ---
 
-## ドキュメント要件
+## Documentation Requirements
 
-### 製品ページ用ドキュメント
+### Product Page Documentation
 
-マーケットプレイスの製品ページに表示されるドキュメント:
-- インストール手順
-- 初期セットアップガイド
-- 機能の使い方
+Documentation displayed on the marketplace product page:
+- Installation instructions
+- Initial setup guide
+- How to use features
 - FAQ
-- トラブルシューティング
+- Troubleshooting
 
-### 開発者向けドキュメント
+### Developer Documentation
 
-フックやフィルター、テンプレートオーバーライドの説明:
+Descriptions of hooks, filters, and template overrides:
 
 ```markdown
 ## Hooks Reference
 
 ### Actions
-- `my_extension_before_process` — 処理開始前に実行
+- `my_extension_before_process` — Fires before processing begins
   - Parameters: `$order` (WC_Order)
-- `my_extension_after_process` — 処理完了後に実行
+- `my_extension_after_process` — Fires after processing completes
   - Parameters: `$order` (WC_Order), `$result` (array)
 
 ### Filters
-- `my_extension_default_settings` — デフォルト設定値をフィルター
+- `my_extension_default_settings` — Filters the default settings values
   - Parameters: `$settings` (array)
   - Return: array
 ```
 
-### Changelog の公開
+### Publishing the Changelog
 
-`changelog.txt` の内容は製品ページにも表示されるため、
-ユーザーが理解しやすい形で記述する。技術的な内部変更よりも
-ユーザーに影響する変更を中心に。
-
----
-
-## 提出～リリースのタイムライン目安
-
-```
-提出
- ├─ 自動テスト（即時～数時間）
- ├─ ビジネスレビュー（最大30日）
- ├─ コードレビュー（フィードバック込みで1～3週間）
- ├─ UXレビュー（1～2週間）
- ├─ フィードバック対応・再提出（0～数週間）
- └─ 承認 → ローンチ準備 → 公開
-```
-
-初回提出から公開まで1～3ヶ月を見込んでおくと安全。
-フィードバックへの迅速な対応が期間短縮の鍵になる。
+The contents of `changelog.txt` are also displayed on the product page, so write entries
+in a way that users can understand. Focus on changes that affect users rather than
+technical internal changes.
 
 ---
 
-## よくある審査リジェクト理由と対策
+## Estimated Submission-to-Release Timeline
 
-| リジェクト理由 | 対策 |
-|---------------|------|
-| HPOS非互換 | `declare_compatibility('custom_order_tables')` を宣言し、直接DBクエリを排除 |
-| セキュリティ問題 | 全入力のサニタイズ、全出力のエスケープ、nonce検証、capability check |
-| 商標違反 | プラグイン名からWooCommerce商標の不適切な使用を除去 |
-| 外部リンク | マーケットプレイス外へのアップセル/アフィリエイトリンクを除去 |
-| トップレベルメニュー | WooCommerce配下のサブメニューに変更 |
-| 独自テレメトリ | 独自のトラッキング/テレメトリコードを除去 |
-| バージョン不一致 | ヘッダー、changelog、アップロード時のバージョンを統一 |
-| changelog未設置 | `changelog.txt` を正しいフォーマットで作成 |
-| 国際化不備 | 全テキストを翻訳関数でラップ、テキストドメインの一致確認 |
-| デモ環境なし | 審査チーム用のデモサイトを準備 |
+```
+Submission
+ ├─ Automated tests (immediate to a few hours)
+ ├─ Business review (up to 30 days)
+ ├─ Code review (1–3 weeks including feedback)
+ ├─ UX review (1–2 weeks)
+ ├─ Feedback response and resubmission (0 to several weeks)
+ └─ Approval → launch preparation → public release
+```
+
+Allow 1–3 months from initial submission to public release.
+Responding to feedback quickly is the key to shortening the timeline.
+
+---
+
+## Common Rejection Reasons and Solutions
+
+| Rejection Reason | Solution |
+|-----------------|---------|
+| HPOS incompatibility | Declare `declare_compatibility('custom_order_tables')` and eliminate direct DB queries |
+| Security issues | Sanitize all inputs, escape all outputs, nonce verification, capability checks |
+| Trademark violation | Remove improper use of WooCommerce trademark from plugin name |
+| External links | Remove upsell/affiliate links to sites outside the marketplace |
+| Top-level menu | Change to a submenu under WooCommerce |
+| Proprietary telemetry | Remove proprietary tracking/telemetry code |
+| Version mismatch | Align version across header, changelog, and upload time |
+| Missing changelog | Create `changelog.txt` with the correct format |
+| Poor internationalization | Wrap all text in translation functions, confirm text domain match |
+| No demo environment | Prepare a demo site for the review team |

@@ -1,39 +1,39 @@
-# 製品ページコンテンツ
+# Product Page Content
 
-## 製品名
+## Product Name
 
-製品名はマーケットプレイス検索で最初に目に入る要素。以下のルールに従う:
+The product name is the first element visitors see in marketplace search. Follow these rules:
 
-**やるべきこと:**
-- 機能を端的に表す名前にする（例: "Appointments", "Advanced Shipping"）
-- ユーザーが検索しそうなキーワードを含める
-- 独自性のある名前にする
+**Do:**
+- Use a name that clearly describes the feature (e.g., "Appointments", "Advanced Shipping")
+- Include keywords that users are likely to search for
+- Choose a distinctive name
 
-**やってはいけないこと:**
-- ブランド名を前面に出す（❌ "VendorXYZ Bookings Plugin for WooCommerce"）
-- 既存のマーケットプレイス製品名に酷似する名前
-- WooCommerce の商標ガイドラインに違反する名前
-- 製品の説明文をそのまま名前にする
+**Do not:**
+- Lead with a brand name (❌ "VendorXYZ Bookings Plugin for WooCommerce")
+- Choose a name that closely resembles an existing marketplace product
+- Use a name that violates WooCommerce trademark guidelines
+- Use the product description itself as the name
 
-名前の変更は公開後にはマーケットプレイスチームへの依頼が必要。
+Changing the name after launch requires a request to the marketplace team.
 
-## 短い説明（Short Description）
+## Short Description
 
-製品カードやGoogle検索結果に表示される。最も重要なセールスコピー。
+Displayed on product cards and in Google search results. The most important sales copy.
 
-**ルール:**
-- 1〜2文で製品の価値を伝える
-- 検索エンジン最適化を意識（キーワードを自然に含める）
-- 機能ではなくベネフィットを先に
+**Rules:**
+- Convey the product's value in 1–2 sentences
+- Keep SEO in mind (include keywords naturally)
+- Lead with benefits, not features
 
-**テンプレート:**
+**Template:**
 
 ```
-[製品名] enables your WooCommerce store to [主要ベネフィット].
-[差別化ポイントまたは具体的な機能を1文で].
+[Product Name] enables your WooCommerce store to [primary benefit].
+[Differentiator or specific feature in one sentence].
 ```
 
-**例:**
+**Example:**
 
 ```
 Advanced Shipping Labels enables your WooCommerce store to automatically generate
@@ -41,100 +41,101 @@ and print shipping labels for major carriers. Save hours on order fulfillment
 with batch processing and real-time rate calculation.
 ```
 
-**日本語例:**
+**Japanese example:**
 
 ```
 Advanced Shipping Labels を使えば、主要な配送業者の送り状を自動生成・印刷できます。
 バッチ処理とリアルタイム料金計算で、出荷作業を大幅に効率化します。
 ```
 
-## 長い説明（Description）
+## Long Description
 
-製品ページのメインコンテンツ。以下の構成で作成する:
+The main content of the product page. Create it using the following structure:
 
-### 推奨構成
+### Recommended Structure
 
 ```markdown
-## [製品が解決する問題/ベネフィット — 導入部]
+## [Problem the product solves / Benefit — Introduction]
 
-[2〜3文で、どんなマーチャントのどんな課題を解決するかを説明。
-共感を示し、この製品がなぜ必要かを伝える。]
+[2–3 sentences explaining what kind of merchant and what challenge this solves.
+Show empathy and explain why this product is needed.]
 
 ## Key Benefits
 
-* **[ベネフィット1]** — [具体的な効果を1文で]
-* **[ベネフィット2]** — [具体的な効果を1文で]
-* **[ベネフィット3]** — [具体的な効果を1文で]
-* **[ベネフィット4]** — [具体的な効果を1文で]
+* **[Benefit 1]** — [Specific outcome in one sentence]
+* **[Benefit 2]** — [Specific outcome in one sentence]
+* **[Benefit 3]** — [Specific outcome in one sentence]
+* **[Benefit 4]** — [Specific outcome in one sentence]
 
 ## How It Works
 
-[製品の基本的な使い方を3〜5ステップで簡潔に。
-技術的な詳細はドキュメントに任せ、ここでは概要のみ。]
+[Briefly describe the product's basic usage in 3–5 steps.
+Leave technical details to the documentation; provide only an overview here.]
 
 1. Install and activate the extension
-2. [セットアップステップ]
-3. [主要な操作]
-4. [結果/ベネフィットの体験]
+2. [Setup step]
+3. [Primary action]
+4. [Experience the result/benefit]
 
 ## Use Cases
 
-**[ユースケース1のタイトル]**
-[ターゲットユーザーと具体的なシナリオを1〜2文で]
+**[Use Case 1 Title]**
+[Target user and specific scenario in 1–2 sentences]
 
-**[ユースケース2のタイトル]**
-[ターゲットユーザーと具体的なシナリオを1〜2文で]
+**[Use Case 2 Title]**
+[Target user and specific scenario in 1–2 sentences]
 
 ## Compatibility
 
 * WooCommerce [minimum] and above
 * WordPress [minimum] and above
 * Compatible with block-based checkout
-* Works with [関連する主要拡張]
+* Works with [key related extensions]
 ```
 
-### AI最適化のポイント（2026年推奨）
+### AI Optimization Tips (2026 Recommendation)
 
-WooCommerceの最新ガイドラインでは、AI/生成エンジンがコンテンツを引用しやすい書き方を推奨:
+WooCommerce's latest guidelines recommend writing in a way that makes it easy for AI/generative
+engines to cite the content:
 
-- **直接的で事実的なトーン**を使う（「〜かもしれません」ではなく「〜します」）
-- 見出しを「what is」「how to」の形式にする
-- 最も重要な情報を各セクションの冒頭に置く
-- 具体的な数値や機能名を含める
+- Use a **direct, factual tone** ("it does X", not "it might do X")
+- Format headings as "what is" / "how to" questions
+- Put the most important information at the start of each section
+- Include specific numbers and feature names
 
-### 書き方の原則
+### Writing Principles
 
-**Focus on Sales, Not Specs（スペックより販売）:**
-技術的な詳細はドキュメントに。説明文ではベネフィットを前面に。
+**Focus on Sales, Not Specs:**
+Technical details belong in documentation. Lead with benefits in the description.
 
 ```
 ❌ "Uses WC_Payment_Gateway class with tokenization support via WC_Payment_Token API"
 ✅ "Securely saves customer payment methods for faster repeat purchases"
 ```
 
-**Start With Top Benefits（トップベネフィットから）:**
-スキャンしやすいリスト形式で最も説得力のあるポイントを先に。
+**Start With Top Benefits:**
+Use a scannable list format and put the most persuasive points first.
 
-**Visual Aids（ビジュアル補助）:**
-設定画面のスクリーンショットはドキュメントに。製品ページではフロントエンドの
-見た目や結果を見せる画像を使う。
+**Visual Aids:**
+Keep settings screen screenshots in documentation. On the product page, use images that show
+the frontend appearance or results.
 
-## FAQ セクション
+## FAQ Section
 
-FAQは購入前の不安を解消し、コンバージョンを上げる重要なセクション。
+FAQs are an important section for resolving pre-purchase concerns and increasing conversions.
 
-### 必須FAQ項目
+### Required FAQ Items
 
 ```markdown
 **Does this extension work with the block-based checkout?**
-Yes, [製品名] is fully compatible with the WooCommerce block-based checkout
+Yes, [Product Name] is fully compatible with the WooCommerce block-based checkout
 as well as the classic shortcode checkout.
 
-**Is this extension compatible with [主要な関連拡張]?**
-Yes, [製品名] works seamlessly with [拡張名]. [簡単な説明].
+**Is this extension compatible with [key related extension]?**
+Yes, [Product Name] works seamlessly with [Extension Name]. [Brief explanation].
 
 **What version of WooCommerce and WordPress do I need?**
-[製品名] requires WooCommerce [version]+ and WordPress [version]+.
+[Product Name] requires WooCommerce [version]+ and WordPress [version]+.
 We recommend always running the latest versions for the best experience.
 
 **Do you offer support?**
@@ -143,59 +144,59 @@ If you need assistance, please submit a support ticket from your
 WooCommerce.com account.
 
 **Can I try before I buy?**
-[デモがある場合: Yes, check out our live demo at [URL].]
-[デモがない場合: We offer a 30-day money-back guarantee, so you can
+[If a demo exists: Yes, check out our live demo at [URL].]
+[If no demo: We offer a 30-day money-back guarantee, so you can
 purchase with confidence.]
 
 **Will this slow down my store?**
-[製品名] is built with performance in mind. [具体的なパフォーマンス
-配慮点を1文で].
+[Product Name] is built with performance in mind. [One sentence on specific
+performance considerations].
 ```
 
-### 効果的なFAQの作り方
+### How to Write Effective FAQs
 
-- 購入を迷っている人の視点で考える
-- 互換性・パフォーマンス・サポートの3つは必ずカバー
-- 技術的な質問はドキュメントへリンク
-- サポートの安心感を与える
-- トラブルシューティングガイドへの直接リンクを含める
+- Think from the perspective of someone hesitant to purchase
+- Always cover the three areas: compatibility, performance, and support
+- Link technical questions to documentation
+- Provide reassurance about support
+- Include direct links to the troubleshooting guide
 
-## メディアギャラリー
+## Media Gallery
 
-### Featured Image（アイキャッチ）
-製品ページのトップに表示される画像。フロントエンド（ショッパーが見る画面）の
-スクリーンショットが最適。
+### Featured Image
+The image displayed at the top of the product page. A screenshot of the frontend (what
+shoppers see) is ideal.
 
-### ギャラリー画像の推奨構成
+### Recommended Gallery Image Set
 
-1. **フロントエンドのメイン画面** — ショッパーが実際に見る画面
-2. **管理画面の設定ページ** — マーチャントが操作する画面
-3. **主要機能のハイライト** — 差別化ポイントの視覚的説明
-4. **ビフォー/アフター** — 導入前後の比較（該当する場合）
-5. **モバイル表示** — レスポンシブ対応の証拠
+1. **Frontend main screen** — The screen shoppers actually see
+2. **Admin settings page** — The primary screen merchants interact with
+3. **Key feature highlight** — Visual explanation of the differentiating point
+4. **Before/After** — Comparison before and after adoption (where applicable)
+5. **Mobile view** — Evidence of responsive design
 
-### デモ環境の準備
+### Demo Environment Setup
 
-審査チームと潜在顧客の両方に向けて:
+For both the review team and potential customers:
 
-- フロントエンド（ショッパー視点）とバックエンド（管理者視点）の両方を見せる
-- テスト用の商品・注文データを入れておく
-- 拡張の全機能が動作する状態にする
-- ログイン情報を明確に提供する（審査用）
-- InstaWP や wp-env ベースのデモが便利
+- Show both frontend (shopper perspective) and backend (admin perspective)
+- Populate with test products and order data
+- Have all extension features in a working state
+- Clearly provide login credentials (for review)
+- InstaWP or wp-env-based demos are convenient
 
-## 製品アイコン
+## Product Icon
 
-- 160×160px（JPG or PNG）、表示は80×80px
-- 製品のロゴ（ブランドロゴではない）
-- シンボル/アイコン推奨（小さいと文字は読めない）
-- 実際のコンテンツは112×112pxの中心領域に収める
-- 角丸はCSSで適用されるので画像自体には不要
-- 透過背景の場合はハイライトカード背景色を設定
+- 160×160px (JPG or PNG), displayed at 80×80px
+- Product logo (not a brand logo)
+- Symbol/icon recommended (text is unreadable at small sizes)
+- Keep actual content within the central 112×112px area
+- Corner rounding is applied via CSS — do not include it in the image
+- For transparent backgrounds, set a highlight card background color
 
-## ハイライトカード背景色
+## Highlight Card Background Color
 
-- 製品アイコンの背景に表示されるカラー
-- マーケットプレイスのホームページなどで使用
-- Vendor Dashboard > Product Data > Woo Product Data > Highlight card background color
-- HEXカラーコードで指定
+- The color displayed behind the product icon
+- Used on the marketplace homepage and featured pages
+- Set at: Vendor Dashboard > Product Data > Woo Product Data > Highlight card background color
+- Specified as a HEX color code

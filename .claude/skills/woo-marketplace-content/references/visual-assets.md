@@ -1,130 +1,130 @@
-# ビジュアルアセット計画
+# Visual Asset Plan
 
-## 製品アイコン仕様
+## Product Icon Specifications
 
-| 項目 | 仕様 |
-|------|------|
-| サイズ | 160×160px（表示は80×80px） |
-| フォーマット | JPG or PNG |
-| コンテンツ領域 | 中心の112×112px内に収める |
-| 角丸 | CSSで適用されるので画像に含めない |
-| 内容 | 製品のロゴ/シンボル（ブランドロゴではない） |
-| テキスト | 避ける（80px表示では読めない） |
-| 透過背景 | 可（ハイライトカード背景色を設定する） |
+| Item | Specification |
+|------|--------------|
+| Size | 160×160px (displayed at 80×80px) |
+| Format | JPG or PNG |
+| Content area | Keep within the central 112×112px |
+| Corner rounding | Applied via CSS — do not include in the image |
+| Content | Product logo/symbol (not a brand logo) |
+| Text | Avoid (unreadable at 80px display size) |
+| Transparent background | Allowed (set a highlight card background color) |
 
-製品アイコンのデザインガイド:
-- シンプルなシンボルやアイコンが最適
-- 製品の機能を視覚的に表現する
-- 小さくても認識できるデザインにする
-- 他の製品と区別しやすい色使いにする
+Product icon design guide:
+- Simple symbols or icons work best
+- Visually represent the product's function
+- Design to be recognizable at small sizes
+- Use colors that stand out from other products
 
-## ハイライトカード背景色
+## Highlight Card Background Color
 
-アイコンの背景に表示される色。マーケットプレイスのホームページや
-特集ページで使われる。
+The color displayed behind the icon. Used on the marketplace homepage and
+featured pages.
 
-設定場所: **Product Data > Woo Product Data > Highlight card background color**
+Setting location: **Product Data > Woo Product Data > Highlight card background color**
 
-HEXカラーコードを指定。アイコンとのコントラストを確保する。
+Specify as a HEX color code. Ensure sufficient contrast with the icon.
 
-## メディアギャラリー
+## Media Gallery
 
-### Featured Image（アイキャッチ画像）
+### Featured Image
 
-製品ページの最上部に表示される最も重要な画像。
+The most important image — displayed at the very top of the product page.
 
-推奨:
-- フロントエンド（ショッパーが見る画面）のスクリーンショット
-- 製品の主要価値が一目でわかる画面
-- 最小サイズ: 555×416px
-- 高解像度（Retina対応: 2倍サイズ推奨）
+Recommended:
+- A screenshot of the frontend (what shoppers see)
+- A screen that immediately communicates the product's primary value
+- Minimum size: 555×416px
+- High resolution (Retina-ready: 2x size recommended)
 
-### ギャラリー画像の推奨セット
+### Recommended Gallery Image Set
 
-以下の順序で5〜8枚を準備する:
+Prepare 5–8 images in the following order:
 
 ```
-1. フロントエンド: メイン画面
-   → ショッパーが最も目にする画面。チェックアウト、商品ページ等。
+1. Frontend: Main screen
+   → The screen shoppers see most often. Checkout, product page, etc.
 
-2. フロントエンド: 主要機能
-   → 差別化ポイントの視覚的証拠。
+2. Frontend: Key feature
+   → Visual evidence of the differentiating point.
 
-3. 管理画面: 設定ページ
-   → マーチャントが操作する主要画面。
+3. Admin: Settings page
+   → The primary screen merchants interact with.
 
-4. 管理画面: 注文/商品管理での統合
-   → WooCommerce管理画面にどう統合されるか。
+4. Admin: Integration in order/product management
+   → How the extension integrates into the WooCommerce admin.
 
-5. モバイル表示
-   → レスポンシブ対応の証拠（フロントエンド）。
+5. Mobile view
+   → Evidence of responsive design (frontend).
 
-6. (オプション) ビフォー/アフター
-   → 導入前後の比較。
+6. (Optional) Before/After
+   → Comparison before and after adopting the extension.
 
-7. (オプション) レポート/ダッシュボード
-   → 分析機能がある場合。
+7. (Optional) Reports/Dashboard
+   → If analytics features are available.
 
-8. (オプション) 連携/統合
-   → 外部サービスとの連携画面。
+8. (Optional) Integrations/connections
+   → Screenshot of external service integration.
 ```
 
-### スクリーンショット撮影ガイド
+### Screenshot Capture Guide
 
-**準備:**
-- ブラウザをフルHD（1920×1080）に設定
-- ブラウザの拡張機能・ブックマークバーを非表示
-- テストデータをリアルに見えるものにする（"Test Product" ではなく実際の商品名）
-- WordPress管理バーの管理者名やアバターに注意
+**Preparation:**
+- Set your browser to full HD (1920×1080)
+- Hide browser extensions and bookmarks bar
+- Use realistic test data (actual product names, not "Test Product")
+- Be mindful of the administrator name and avatar in the WordPress admin bar
 
-**撮影時:**
-- 対象UIが画面の中心にくるよう調整
-- 不要なサイドバー/ナビゲーションは含めない（UIが小さくなる）
-- 重要な部分は赤枠やハイライトで強調（必要に応じて）
-- ダークモードではなく標準テーマで撮影
+**During capture:**
+- Adjust so the target UI is centered on screen
+- Exclude unnecessary sidebars/navigation (they shrink the UI)
+- Highlight important areas with a red border or callout if needed
+- Capture in the standard theme, not dark mode
 
-**加工時:**
-- 個人情報（メールアドレス、名前等）をマスク
-- テスト環境のURLをマスク
-- 一貫した画像サイズを維持（幅1200px推奨）
-- ファイルサイズを最適化（tinypng等で圧縮）
-- altテキストを必ず設定
+**Post-processing:**
+- Mask personal information (email addresses, names, etc.)
+- Mask the test environment URL
+- Maintain consistent image size (1200px wide recommended)
+- Optimize file size (compress with tinypng, etc.)
+- Always set alt text
 
-**NG例:**
-- ブラウザのアドレスバーにlocalhost:8888が見える
-- 管理者名が"admin"のまま
-- テスト商品が"Test Product #1"
-- WP_DEBUGのエラー通知が画面に表示されている
-- 他社プラグインの管理画面が映り込んでいる
+**Examples of what to avoid:**
+- Browser address bar shows localhost:8888
+- Administrator name is still "admin"
+- Test product is named "Test Product #1"
+- WP_DEBUG error notices appear on screen
+- Another plugin's admin screen is visible in the background
 
-## デモ環境チェックリスト
+## Demo Environment Checklist
 
-審査チームと潜在顧客の両方に向けたデモ環境の準備:
+Preparing a demo environment for both the review team and potential customers:
 
-### 必須項目
+### Required Items
 
-- [ ] WooCommerce + 製品がインストール・有効化済み
-- [ ] テスト商品が5〜10点登録済み（リアルな商品名・画像）
-- [ ] テスト注文が複数のステータスで存在
-- [ ] 拡張の全機能がデモ可能な状態
-- [ ] フロントエンド（ショッパー視点）でアクセス可能
-- [ ] 管理画面（管理者視点）でアクセス可能
-- [ ] ログイン情報を明示（審査用）
+- [ ] WooCommerce + product installed and activated
+- [ ] 5–10 test products registered (realistic product names and images)
+- [ ] Multiple test orders exist across various statuses
+- [ ] All extension features are in a demonstrable state
+- [ ] Accessible from the frontend (shopper perspective)
+- [ ] Accessible from the admin (administrator perspective)
+- [ ] Login credentials clearly provided (for review)
 
-### 推奨項目
+### Recommended Items
 
-- [ ] テストカード/テストモードで決済テスト可能（決済系の場合）
-- [ ] 日本語/英語の両方のロケールでデモ可能（日本市場向け）
-- [ ] Block-based checkout で動作確認可能
-- [ ] Classic checkout でも動作確認可能
-- [ ] モバイル端末からアクセスしてもレイアウト崩れなし
+- [ ] Payment test possible with test card/test mode (for payment extensions)
+- [ ] Demo works in both Japanese/English locales (for Japan-market extensions)
+- [ ] Functionality verifiable with block-based checkout
+- [ ] Functionality also verifiable with classic checkout
+- [ ] No layout issues when accessed from a mobile device
 
-### デモ環境の構築方法
+### How to Set Up the Demo Environment
 
-**InstaWP（推奨）:**
-URLを共有するだけでアクセス可能。一時的な環境で安全。
+**InstaWP (Recommended):**
+Accessible by simply sharing a URL. Temporary environment that is safe to share.
 
-**wp-env ベースのデプロイ:**
+**wp-env-based deployment:**
 ```json
 // .wp-env.json
 {
@@ -139,28 +139,28 @@ URLを共有するだけでアクセス可能。一時的な環境で安全。
 }
 ```
 
-**自前サーバー:**
-ステージング環境に Basic認証 + デモ用管理者アカウントを準備。
+**Own server:**
+Prepare a staging environment with Basic Auth + a demo administrator account.
 
-## 動画コンテンツ（オプション）
+## Video Content (Optional)
 
-製品ページに埋め込む動画は非常に効果的:
+A video embedded on the product page can be highly effective:
 
-- 1〜3分の短いデモ動画
-- セットアップから基本操作まで
-- BGMは控えめ、ナレーションまたは字幕付き
-- YouTube or Vimeo にアップロードしてURL共有
-- サムネイルは製品アイコンまたはフロントエンド画面
+- A short demo video of 1–3 minutes
+- Covers setup through basic operation
+- Subtle background music; narration or subtitles included
+- Upload to YouTube or Vimeo and share the URL
+- Thumbnail uses the product icon or a frontend screen
 
-## アセット生成チェックリスト
+## Asset Generation Checklist
 
-製品公開に向けた全アセットの確認:
+Verification of all assets before product launch:
 
-- [ ] 製品アイコン（160×160px）
-- [ ] ハイライトカード背景色（HEX）
-- [ ] Featured Image（555×416px以上）
-- [ ] ギャラリー画像（5〜8枚）
-- [ ] 全画像にaltテキスト設定
-- [ ] スクリーンショットに個人情報なし
-- [ ] デモ環境URL + ログイン情報
-- [ ] (オプション) デモ動画URL
+- [ ] Product icon (160×160px)
+- [ ] Highlight card background color (HEX)
+- [ ] Featured image (555×416px or larger)
+- [ ] Gallery images (5–8 images)
+- [ ] Alt text set on all images
+- [ ] No personal information in screenshots
+- [ ] Demo environment URL + login credentials
+- [ ] (Optional) Demo video URL

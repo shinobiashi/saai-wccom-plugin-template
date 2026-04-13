@@ -1,261 +1,265 @@
 ---
 name: woo-marketplace-pricing
 description: >
-  WooCommerce.com Marketplaceで販売するプラグインの価格設定を提案するスキル。
-  プラグインの機能カテゴリ・複雑度・ターゲット市場をヒアリングし、マーケットプレイスの
-  競合製品の価格帯を調査した上で、70/30収益分配を考慮した最適な年間サブスクリプション
-  価格を提案する。価格ティア設計、Freemiumモデル判断、日本市場向け価格設定、
-  SaaS Billing API対応の月額プラン設計もカバー。「価格設定」「いくらにすべき」
-  「pricing」「いくらで売る」「年間サブスクリプション」「月額」「Freemium判断」
-  「競合調査」「収益シミュレーション」「値付け」といったキーワードで使用する。
-  プラグインのビジネスモデルや収益性について相談された場合にも積極的に参照すること。
+  Skill for recommending pricing for plugins sold on the WooCommerce.com Marketplace.
+  Gathers information about the plugin's feature category, complexity, and target market,
+  researches competitor pricing in the marketplace, and proposes an optimal annual subscription
+  price factoring in the 70/30 revenue split. Also covers pricing tier design, Freemium model
+  decisions, pricing for the Japanese market, and monthly plan design using the SaaS Billing API.
+  Use when keywords like "pricing", "how much to charge", "how much to sell for",
+  "annual subscription", "monthly pricing", "Freemium decision", "competitor research",
+  "revenue simulation", or "price point" appear. Also reference proactively when consulting
+  on business model or profitability for a WooCommerce plugin.
 ---
 
 # WooCommerce Marketplace Pricing Strategy
 
-プラグインの価格は、マーケットプレイスでの成功を左右する重要な決定。
-高すぎると購入されず、安すぎるとサポートコストを賄えない。
-このスキルは、データに基づいた価格提案を行う。
+Pricing is one of the most important decisions for marketplace success.
+Too high and no one buys; too low and you cannot cover support costs.
+This skill provides data-driven pricing recommendations.
 
-## 手順
+## Process
 
-### 1) プラグイン情報のヒアリング
+### 1) Gather Plugin Information
 
-価格提案に必要な情報を収集する:
+Collect the information needed to make a pricing recommendation:
 
-**基本情報:**
-- プラグイン名と機能の概要
-- カテゴリ（決済、配送、マーケティング、商品管理、分析、etc.）
-- ターゲットユーザー（小規模店舗、中規模、エンタープライズ）
-- 主要機能の数と複雑度
-- 外部API/サービスとの連携有無
+**Basic information:**
+- Plugin name and feature summary
+- Category (payments, shipping, marketing, product management, analytics, etc.)
+- Target users (small stores, mid-market, enterprise)
+- Number of core features and their complexity
+- Whether the plugin integrates with external APIs or services
 
-**ビジネス情報:**
-- 自社サイトでの販売価格（既にある場合、マーケットプレイス価格はこれ以下が必要）
-- Freemium版の有無（WordPress.orgに無料版があるか）
-- サポート体制（個人開発者 vs チーム）
-- 想定するサポート工数
-- 月間開発時間の投資
+**Business information:**
+- Price on your own site (if already selling — marketplace price must be equal or lower)
+- Whether a Freemium version exists (free version on WordPress.org)
+- Support capacity (solo developer vs. team)
+- Expected support hours per user
+- Monthly development time investment
 
-### 2) マーケットプレイス競合調査
+### 2) Competitor Research
 
-同カテゴリの既存製品の価格帯を調査する。`scripts/analyze_competitors.sh`
-を使用して、WooCommerce.comマーケットプレイスの競合製品情報を取得できる。
+Research the price range of existing products in the same category. You can use
+`scripts/analyze_competitors.sh` to retrieve competitor product information from the
+WooCommerce.com marketplace.
 
-手動調査の場合は以下の情報を収集:
-- 同カテゴリの製品名と年間価格
-- 各製品の主要機能
-- 評価とレビュー数
-- Freemium版の有無
+For manual research, collect the following:
+- Product names and annual prices in the same category
+- Core features of each product
+- Ratings and review count
+- Whether a Freemium version exists
 
-### 3) 価格帯の決定
+### 3) Determine the Price Range
 
-マーケットプレイスの実勢価格帯を参考に、以下のフレームワークで価格を決定する。
+Using the marketplace's actual price landscape as a reference, apply the following framework
+to determine your price.
 
-## 価格決定フレームワーク
+## Pricing Decision Framework
 
-### マーケットプレイス価格帯の実態（2026年時点）
+### Actual Marketplace Price Ranges (as of 2026)
 
-| カテゴリ | 年間価格帯 | 代表的な製品 |
-|---------|-----------|------------|
-| 決済ゲートウェイ | $0–$79/年 | 多くは無料（プロバイダが費用負担） |
-| 配送拡張 | $49–$149/年 | Table Rate Shipping $99, Distance Rate $79 |
-| 商品管理 | $49–$149/年 | Product Add-Ons $49, Bundles $49 |
-| サブスクリプション | $199–$249/年 | Subscriptions $199, Memberships $199 |
-| マーケティング | $49–$179/年 | Affiliate $179, Smart Coupons $99 |
-| 分析/レポート | $49–$149/年 | Analytics Pro $79 |
-| 在庫管理 | $79–$199/年 | Stock Manager $79 |
-| 予約/ブッキング | $199–$249/年 | Bookings $249 |
-| コンプライアンス | $49–$99/年 | GDPR $49 |
-| 統合/連携 | $79–$199/年 | QuickBooks $79, Zapier $99 |
+| Category | Annual Price Range | Representative Products |
+|----------|--------------------|------------------------|
+| Payment gateways | $0–$79/year | Most are free (provider subsidized) |
+| Shipping extensions | $49–$149/year | Table Rate Shipping $99, Distance Rate $79 |
+| Product management | $49–$149/year | Product Add-Ons $49, Bundles $49 |
+| Subscriptions | $199–$249/year | Subscriptions $199, Memberships $199 |
+| Marketing | $49–$179/year | Affiliate $179, Smart Coupons $99 |
+| Analytics/reporting | $49–$149/year | Analytics Pro $79 |
+| Inventory management | $79–$199/year | Stock Manager $79 |
+| Bookings/appointments | $199–$249/year | Bookings $249 |
+| Compliance | $49–$99/year | GDPR $49 |
+| Integrations/connections | $79–$199/year | QuickBooks $79, Zapier $99 |
 
-### 複雑度による価格ガイドライン
+### Pricing Guidelines by Complexity
 
-**Tier 1: シンプル機能（$49–$79/年）**
-- 単一機能に特化
-- 設定項目が少ない（1画面）
-- 外部APIなし
-- サポート工数が少ない
-- 例: 単純なフィールド追加、表示カスタマイズ、単一フォーマットのエクスポート
+**Tier 1: Simple features ($49–$79/year)**
+- Focused on a single function
+- Few settings (one screen)
+- No external APIs
+- Low support burden
+- Examples: simple field additions, display customizations, single-format exports
 
-**Tier 2: 標準機能（$79–$149/年）**
-- 複数の関連機能を提供
-- 中程度の設定（2〜3画面/タブ）
-- 軽度のAPI連携あり
-- 通常のサポート工数
-- 例: 配送料金計算、商品オプション、レポート生成
+**Tier 2: Standard features ($79–$149/year)**
+- Multiple related features
+- Moderate settings (2–3 screens/tabs)
+- Light API integration
+- Average support burden
+- Examples: shipping rate calculation, product options, report generation
 
-**Tier 3: 高度な機能（$149–$249/年）**
-- 複雑なビジネスロジック
-- 豊富な設定（4+画面/タブ）
-- 複数のAPI連携
-- 高度なサポートが必要
-- 例: サブスクリプション管理、予約システム、多言語対応
+**Tier 3: Advanced features ($149–$249/year)**
+- Complex business logic
+- Rich settings (4+ screens/tabs)
+- Multiple API integrations
+- Requires expert support
+- Examples: subscription management, booking systems, multi-language support
 
-**Tier 4: エンタープライズ級（$249–$399+/年）**
-- ビジネスクリティカルな機能
-- カスタマイズ性が高い
-- 大規模データ処理
-- 専門的なサポートが必要
-- 例: ERPintegration、マルチベンダー、高度なフルフィルメント
+**Tier 4: Enterprise-grade ($249–$399+/year)**
+- Business-critical functionality
+- Highly customizable
+- Large data processing
+- Specialized support required
+- Examples: ERP integration, multi-vendor, advanced fulfillment
 
-### 価格算定の要素
-
-```
-推奨価格 = ベース価格 × 複雑度係数 × 市場係数
-
-ベース価格:
-  - 単一機能: $49
-  - 複数機能: $79
-  - 高度な機能: $149
-
-複雑度係数:
-  - 設定画面1つ: ×1.0
-  - 設定画面2-3: ×1.2
-  - 設定画面4+: ×1.5
-  - 外部API連携あり: +$20–50
-  - カスタムDBテーブルあり: +$20
-  - ブロックエディタ統合あり: +$10
-
-市場係数:
-  - 競合が多い: ×0.8（価格で差別化する必要）
-  - 競合が少ない: ×1.2（プレミアム価格が可能）
-  - 競合なし（ニッチ）: ×1.5
-  - 日本市場専用: ×0.8–1.0（市場規模を考慮）
-```
-
-### 収益分配の考慮
-
-マーケットプレイスの70/30分配を考慮した実収益:
+### Price Calculation Factors
 
 ```
-年間価格 $99 の場合:
-  ベンダー取り分: $99 × 0.70 = $69.30/年/ユーザー
-  月あたり: $5.78
+Recommended Price = Base Price × Complexity Multiplier × Market Multiplier
 
-年間価格 $149 の場合:
-  ベンダー取り分: $149 × 0.70 = $104.30/年/ユーザー
-  月あたり: $8.69
+Base Price:
+  - Single feature: $49
+  - Multiple features: $79
+  - Advanced features: $149
 
-年間価格 $199 の場合:
-  ベンダー取り分: $199 × 0.70 = $139.30/年/ユーザー
-  月あたり: $11.61
+Complexity Multiplier:
+  - 1 settings screen: ×1.0
+  - 2–3 settings screens: ×1.2
+  - 4+ settings screens: ×1.5
+  - External API integration: +$20–50
+  - Custom DB tables: +$20
+  - Block editor integration: +$10
+
+Market Multiplier:
+  - Many competitors: ×0.8 (need to differentiate on price)
+  - Few competitors: ×1.2 (premium pricing possible)
+  - No competitors (niche): ×1.5
+  - Japan market only: ×0.8–1.0 (account for market size)
 ```
 
-### サポートコストからの逆算
+### Revenue Split Considerations
+
+Actual vendor revenue after the marketplace's 70/30 split:
 
 ```
-月間サポート工数（1ユーザーあたり平均）:
-  シンプルなプラグイン: 5–10分/月
-  標準的なプラグイン: 10–20分/月
-  複雑なプラグイン: 20–40分/月
+At $99/year annual price:
+  Vendor share: $99 × 0.70 = $69.30/year/user
+  Monthly equivalent: $5.78
 
-サポート担当者の時給を $30 と仮定:
+At $149/year annual price:
+  Vendor share: $149 × 0.70 = $104.30/year/user
+  Monthly equivalent: $8.69
 
-  10分/月 = $5/月 = $60/年
-  20分/月 = $10/月 = $120/年
-  30分/月 = $15/月 = $180/年
+At $199/year annual price:
+  Vendor share: $199 × 0.70 = $139.30/year/user
+  Monthly equivalent: $11.61
+```
 
-必要な年間価格（サポートコストだけでも）:
-  $60 ÷ 0.70 = $86（最低価格）
+### Working Backwards from Support Costs
+
+```
+Average monthly support time per user:
+  Simple plugin: 5–10 min/month
+  Standard plugin: 10–20 min/month
+  Complex plugin: 20–40 min/month
+
+Assuming a support rate of $30/hour:
+
+  10 min/month = $5/month = $60/year
+  20 min/month = $10/month = $120/year
+  30 min/month = $15/month = $180/year
+
+Required annual price (support costs alone):
+  $60 ÷ 0.70 = $86 (minimum price)
   $120 ÷ 0.70 = $171
   $180 ÷ 0.70 = $257
 ```
 
-開発コスト（時給 × 月間開発時間）も加味して損益分岐点を算出する。
+Factor in development costs (hourly rate × monthly development time) to calculate the
+break-even point.
 
-### Freemium 判断基準
+### Freemium Decision Criteria
 
-**Freemiumにすべき場合:**
-- カテゴリに多数の競合が存在する
-- 無料版で十分な価値を提供でき、Proへの自然な導線がある
-- WordPress.orgでの露出が集客チャネルとして重要
-- 口コミ/レビューを初期に集めたい
+**When to go Freemium:**
+- Many competitors exist in the category
+- The free tier can provide genuine value with a natural upgrade path to Pro
+- WordPress.org exposure is an important acquisition channel
+- You want to accumulate reviews and word-of-mouth early on
 
-**有料のみにすべき場合:**
-- ニッチなカテゴリで競合が少ない
-- 機能分離が難しい（無料版に意味のある機能を残せない）
-- ターゲットがエンタープライズ（無料ユーザーのサポートコストが不要）
-- 外部APIコストが発生する（無料ユーザーにもコストがかかる）
+**When to stay paid-only:**
+- Niche category with few competitors
+- Hard to separate features (can't leave meaningful functionality in the free tier)
+- Target audience is enterprise (no need to support free users)
+- External API costs are incurred per user (even free users cost money)
 
-### 月額サブスクリプション
+### Monthly Subscriptions
 
-月額を提供する場合は SaaS Billing API の実装が必須。
-
-```
-月額 → 年額の換算:
-  月額は年額の 1/10 程度が一般的
-  （年額割引で月額より安くする）
-
-  例: 年額 $99 → 月額 $12.99
-      年額 $149 → 月額 $17.99
-      年額 $199 → 月額 $24.99
-```
-
-月額は顧客獲得のハードルを下げるが、解約率が高くなる傾向。
-年額の方がLTV（生涯価値）が高い。
-
-### マーケットプレイス外での販売価格との整合
-
-マーケットプレイスの価格 ≤ 他チャネルの価格（必須ルール）
-
-自社サイトでも販売する場合の戦略:
-- **同一価格**: シンプルで管理しやすい
-- **マーケットプレイスを安くする**: マーケットプレイスの集客力を活用
-- **自社サイトを高くする**: マーケットプレイスルールを満たしつつ、自社サイトでは追加サポートを提供
-
-### 日本市場向け価格設定
-
-日本市場向けプラグインの価格は、グローバル製品より低めに設定することが多い:
-
-- 日本のWooCommerce市場はグローバルより小さい
-- 日本語サポートの工数は大きいが、対象ユーザー数は限定的
-- 円建て感覚: $79 ≈ ¥12,000、$149 ≈ ¥22,000
-- 日本のマーチャントは年間 ¥10,000–¥30,000 程度の拡張費用に慣れている
-
-## 出力フォーマット
-
-価格提案は以下の形式で出力する:
+If offering a monthly option, implementing the SaaS Billing API is required.
 
 ```
-## 価格提案: [プラグイン名]
+Monthly → Annual pricing conversion:
+  Monthly pricing is typically around 1/10 of the annual price
+  (annual offers a discount vs. monthly)
 
-### 推奨価格
-- **年間価格**: $[XX]/年
-- **ベンダー実収益**: $[XX]/年（70%）
-- **月あたり実収益**: $[XX]/月
+  Example: Annual $99 → Monthly $12.99
+           Annual $149 → Monthly $17.99
+           Annual $199 → Monthly $24.99
+```
 
-### 根拠
-- **カテゴリ相場**: $[XX]–$[XX]/年
-- **複雑度**: [Tier X]（[理由]）
-- **競合状況**: [多い/少ない/なし]
-- **差別化**: [差別化ポイント]
+Monthly pricing lowers the barrier to acquisition, but tends to increase churn.
+Annual subscriptions produce a higher LTV (lifetime value).
 
-### 競合比較
-| 製品名 | 年間価格 | 主な違い |
-|--------|---------|---------|
-| [競合A] | $XX | [差異] |
-| [競合B] | $XX | [差異] |
+### Price Alignment with Other Sales Channels
 
-### 収益シミュレーション
-| 年間ユーザー数 | 売上 | ベンダー収益 | サポートコスト | 純利益 |
-|-------------|------|-----------|------------|-------|
+Marketplace price ≤ price on other channels (required rule)
+
+Strategy when also selling on your own site:
+- **Identical pricing**: Simple and easy to manage
+- **Lower on marketplace**: Leverage marketplace traffic for acquisition
+- **Higher on own site**: Satisfies marketplace rules while offering premium support on your own site
+
+### Pricing for the Japanese Market
+
+Plugins targeting the Japanese market are often priced lower than global products:
+
+- The WooCommerce market in Japan is smaller than the global market
+- Japanese-language support requires significant effort, but the user base is limited
+- JPY reference: $79 ≈ ¥12,000; $149 ≈ ¥22,000
+- Japanese merchants are accustomed to paying roughly ¥10,000–¥30,000/year for extensions
+
+## Output Format
+
+Price recommendations should be presented in the following format:
+
+```
+## Pricing Recommendation: [Plugin Name]
+
+### Recommended Price
+- **Annual price**: $[XX]/year
+- **Vendor net revenue**: $[XX]/year (70%)
+- **Monthly net revenue**: $[XX]/month
+
+### Rationale
+- **Category range**: $[XX]–$[XX]/year
+- **Complexity**: [Tier X] ([reason])
+- **Competitive landscape**: [Many / Few / None]
+- **Differentiation**: [key differentiators]
+
+### Competitor Comparison
+| Product | Annual Price | Key Differences |
+|---------|-------------|-----------------|
+| [Competitor A] | $XX | [difference] |
+| [Competitor B] | $XX | [difference] |
+
+### Revenue Simulation
+| Annual Users | Revenue | Vendor Revenue | Support Cost | Net Profit |
+|-------------|---------|----------------|--------------|------------|
 | 50 | $X | $X | $X | $X |
 | 100 | $X | $X | $X | $X |
 | 200 | $X | $X | $X | $X |
 
-### Freemium判断: [推奨/非推奨]
-[理由]
+### Freemium Decision: [Recommended / Not Recommended]
+[Reason]
 
-### 代替案
-- **攻めの価格**: $[XX]（市場シェア獲得優先）
-- **守りの価格**: $[XX]（収益性優先）
+### Alternatives
+- **Aggressive pricing**: $[XX] (prioritize market share)
+- **Conservative pricing**: $[XX] (prioritize profitability)
 ```
 
-## 検証
+## Validation
 
-- 提案価格がカテゴリ相場の範囲内か
-- 自社サイト販売価格以下のルールを満たすか
-- サポートコストを賄える価格か
-- 損益分岐点が現実的なユーザー数で達成可能か
-- 競合と比較して価格に見合う差別化があるか
+- Is the proposed price within the category's typical range?
+- Does it satisfy the rule of being equal to or less than your own site's price?
+- Is the price sufficient to cover support costs?
+- Is the break-even point achievable at a realistic user count?
+- Does the pricing justify differentiation compared to competitors?

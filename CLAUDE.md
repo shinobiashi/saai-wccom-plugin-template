@@ -4,7 +4,7 @@
 
 - **Type**: WooCommerce extension plugin (WordPress plugin)
 - **Namespace**: `{Vendor}\{PluginName}` (PSR-4)
-- **Min Requirements**: PHP 8.1+, WordPress 6.4+, WooCommerce 8.0+
+- **Min Requirements**: PHP 8.2+, WordPress 6.7+, WooCommerce 9.0+
 - **Text Domain**: `{plugin-slug}`
 - **License**: GPL-3.0-or-later
 
@@ -56,16 +56,17 @@ plugin-slug/
 - Prefix all global functions, hooks, options with plugin slug: `{plugin_slug}_`
 - Database table names: `$wpdb->prefix . '{plugin_slug}_tablename'`
 - PHPStan level 5+ (`phpstan.neon` with WordPress/WooCommerce stubs)
-- ESLint with `@wordpress/eslint-plugin`
+- ESLint with `@woocommerce/eslint-plugin` (extends WordPress rules + WooCommerce dependency groups)
 - TypeScript strict mode for all frontend code
 
 ### PHP Style Rules
 
 - Declare `declare(strict_types=1);` at top of every PHP file
 - Type hints on all method parameters and return types
-- Use constructor promotion where appropriate (PHP 8.1+)
+- Use constructor promotion where appropriate (PHP 8.2+)
 - No `@` error suppression operator
 - Array syntax: short arrays `[]` only, never `array()`
+- Singleton `$instance` must be typed `@var ClassName|null` and initialized to `null`; use `is_null()` not `isset()` for the null check
 
 ## WooCommerce HPOS Compatibility (CRITICAL)
 
@@ -265,7 +266,7 @@ class CustomEndpoint extends \WP_REST_Controller {
 
 - Always implement `permission_callback` (never set to `__return_true` for write operations)
 - Return `WP_REST_Response` or `WP_Error`
-- Use `$request->get_param()` with sanitization
+- Use `$request->get_param()` with sanitization; use `?? default` (null coalescing) not `?: default` (Elvis / short ternary — banned by PHPCS)
 - Validate with `'validate_callback'` in args
 
 ## React Admin UI (Gutenberg / wp-scripts)
@@ -282,15 +283,17 @@ class CustomEndpoint extends \WP_REST_Controller {
     "lint:css": "wp-scripts lint-style"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^28.0.0",
-    "@wordpress/element": "^6.0.0",
-    "@wordpress/components": "^28.0.0",
-    "@wordpress/api-fetch": "^7.0.0",
-    "@wordpress/i18n": "^5.0.0",
-    "@types/wordpress__components": "^23.0.0"
+    "@wordpress/scripts": "latest",
+    "@woocommerce/eslint-plugin": "latest",
+    "@wordpress/prettier-config": "latest",
+    "@wordpress/api-fetch": "latest",
+    "@wordpress/i18n": "latest"
   }
 }
 ```
+
+> **Note**: Use `latest` for `@wordpress/*` and `@woocommerce/*` packages to stay current with Gutenberg releases.
+> `package-lock.json` MUST be committed — do NOT add it to `.gitignore`. CI caches depend on it.
 
 ### Data Fetching with wp.apiFetch
 
@@ -401,7 +404,7 @@ add_action('init', function () {
 // .wp-env.json
 {
   "core": null,
-  "phpVersion": "8.1",
+  "phpVersion": "8.2",
   "plugins": [
     "https://downloads.wordpress.org/plugin/woocommerce.latest-stable.zip",
     "."
@@ -413,6 +416,28 @@ add_action('init', function () {
     "afterStart": "wp-env run cli -- wp wc update --yes && wp-env run cli -- wp rewrite structure '/%postname%/'"
   }
 }
+```
+
+### PHPStan Constants Bootstrap
+
+Plugin constants (e.g. `PLUGIN_NAME_URL`) are defined inside `if ( is_woocommerce_active() )` at runtime.
+Create `phpstan-bootstrap.php` in the project root to expose them to static analysis:
+
+```php
+<?php
+// phpstan-bootstrap.php
+define( 'PLUGIN_NAME_PATH', __DIR__ );
+define( 'PLUGIN_NAME_URL', 'http://example.com/wp-content/plugins/plugin-name/' );
+define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+```
+
+Reference it in `phpstan.neon`:
+
+```neon
+parameters:
+    bootstrapFiles:
+        - vendor/autoload.php
+        - phpstan-bootstrap.php
 ```
 
 ### PHPUnit Bootstrap
@@ -444,9 +469,23 @@ require $_tests_dir . '/includes/bootstrap.php';
 ```yaml
 strategy:
   matrix:
-    php: ['8.1', '8.2', '8.3']
-    woocommerce: ['8.0', '9.0', 'latest']
-    wordpress: ['6.4', 'latest']
+    php: ['8.2', '8.3']
+    woocommerce: ['9.0', 'latest']
+    wordpress: ['6.7', 'latest']
+```
+
+### Plugin Activation in CI
+
+`wp plugin activate` takes the **directory name** (slug), not the plugin display name.
+When wp-env mounts `.` as a plugin, the slug matches the repository directory name on the runner.
+Always use the GitHub Actions context variable — never hardcode:
+
+```yaml
+- name: Verify activation
+  run: |
+    wp-env run tests-cli wp plugin activate ${{ github.event.repository.name }}
+    wp-env run tests-cli wp plugin list --status=active --fields=file --format=csv \
+      | grep -q "${{ github.event.repository.name }}" && echo "Plugin active: OK"
 ```
 
 ### Required CI Checks
@@ -496,6 +535,14 @@ strategy:
 8. **Logging sensitive data** (card numbers, tokens) — PCI DSS violation
 9. **Missing text domain** in translatable strings — i18n breaks
 10. **Not handling WooCommerce deactivation** — check `class_exists('WooCommerce')` on init
+11. **Short ternary `?:` (Elvis operator)** — banned by PHPCS (`Universal.Operators.DisallowShortTernary`). Use `??` for null fallback or full ternary `$x ? $x : $default`
+12. **`@var ClassName` without `|null` on singleton `$instance`** — PHPStan reports `is_null()` / `isset()` as always false/true. Always annotate `@var ClassName|null` and initialize `= null`
+13. **`isset()` on a local variable never previously assigned** — PHPStan error. Remove the `isset()` guard; just assign directly
+14. **Plugin constants defined inside conditional blocks** — PHPStan cannot resolve them. Define them in `phpstan-bootstrap.php` for static analysis
+15. **`package-lock.json` in `.gitignore`** — breaks CI `actions/setup-node` cache. Always commit the lockfile
+16. **Hardcoding plugin slug in `wp plugin activate`** — the directory name on the CI runner is the repository name, not `plugin-name`. Use `${{ github.event.repository.name }}`
+17. **JS imports without dependency comment blocks** — `@woocommerce/eslint-plugin` requires `// External dependencies` and `// Internal dependencies` blocks around import groups
+18. **Spaces instead of tabs in JS/JSX** — `prettier` config enforces tabs. Run `npm run lint:js -- --fix` to auto-correct
 
 ## Pro/Free Tier Extension Pattern
 
@@ -521,3 +568,6 @@ add_filter('{plugin_slug}_modify_output', function ($default, $context) {
 - Write tests alongside new features, never defer testing
 - Commit messages: conventional commits (`feat:`, `fix:`, `chore:`, `test:`)
 - When fixing bugs, write a regression test FIRST, then fix
+- When adding plugin constants (`define()`), also add them to `phpstan-bootstrap.php`
+- Never add `package-lock.json` to `.gitignore`
+- JS files must use tabs for indentation and include `// External dependencies` / `// Internal dependencies` comment blocks around import groups
