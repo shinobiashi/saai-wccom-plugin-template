@@ -18,7 +18,7 @@ class Plugin_Name_Admin {
 	/**
 	 * Single instance of the class.
 	 *
-	 * @var Plugin_Name_Admin
+	 * @var Plugin_Name_Admin|null
 	 */
 	private static $instance = null;
 

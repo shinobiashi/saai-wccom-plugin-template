@@ -18,9 +18,9 @@ class Plugin_Name {
 	/**
 	 * Instance of this class.
 	 *
-	 * @var Plugin_Name
+	 * @var Plugin_Name|null
 	 */
-	private static $instance;
+	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
@@ -28,7 +28,7 @@ class Plugin_Name {
 	 * @return Plugin_Name
 	 */
 	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 			self::$instance->init();
 		}

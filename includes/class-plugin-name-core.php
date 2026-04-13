@@ -20,9 +20,9 @@ class Plugin_Name_Core {
 	/**
 	 * Instance of this class.
 	 *
-	 * @var Plugin_Name_Core
+	 * @var Plugin_Name_Core|null
 	 */
-	private static $instance;
+	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
@@ -30,7 +30,7 @@ class Plugin_Name_Core {
 	 * @return Plugin_Name_Core
 	 */
 	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 			self::$instance->init();
 		}
@@ -42,8 +42,6 @@ class Plugin_Name_Core {
 	 */
 	private function init() {
 		// Add WooCommerce hooks here.
-		// Example:
-		// add_action( 'woocommerce_order_status_changed', array( $this, 'on_order_status_changed' ), 10, 3 );
 	}
 
 	/**

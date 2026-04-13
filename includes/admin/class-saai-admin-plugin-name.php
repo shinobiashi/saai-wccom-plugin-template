@@ -20,7 +20,7 @@ class SAAI_Admin_Plugin_Name {
 	/**
 	 * Single instance of the class.
 	 *
-	 * @var SAAI_Admin_Plugin_Name
+	 * @var SAAI_Admin_Plugin_Name|null
 	 */
 	private static $instance = null;
 

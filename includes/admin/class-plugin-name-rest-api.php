@@ -18,7 +18,7 @@ class Plugin_Name_REST_API {
 	/**
 	 * Single instance of the class.
 	 *
-	 * @var Plugin_Name_REST_API
+	 * @var Plugin_Name_REST_API|null
 	 */
 	private static $instance = null;
 
@@ -182,8 +182,8 @@ class Plugin_Name_REST_API {
 	 * @return WP_REST_Response Response object.
 	 */
 	public function get_items( $request ) {
-		$page     = absint( $request->get_param( 'page' ) ?: 1 );
-		$per_page = absint( $request->get_param( 'per_page' ) ?: 20 );
+		$page     = absint( $request->get_param( 'page' ) ?? 1 );
+		$per_page = absint( $request->get_param( 'per_page' ) ?? 20 );
 		$status   = sanitize_text_field( $request->get_param( 'status' ) ?? '' );
 
 		$core  = Plugin_Name_Core::instance();
@@ -191,10 +191,10 @@ class Plugin_Name_REST_API {
 			array(
 				'page'     => $page,
 				'per_page' => $per_page,
-				'status'   => $status ?: null,
+				'status'   => '' !== $status ? $status : null,
 			)
 		);
-		$total = $core->get_total_count( $status ?: null );
+		$total = $core->get_total_count( '' !== $status ? $status : null );
 
 		return rest_ensure_response(
 			array(
