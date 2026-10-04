@@ -571,3 +571,7 @@ add_filter('{plugin_slug}_modify_output', function ($default, $context) {
 - When adding plugin constants (`define()`), also add them to `phpstan-bootstrap.php`
 - Never add `package-lock.json` to `.gitignore`
 - JS files must use tabs for indentation and include `// External dependencies` / `// Internal dependencies` comment blocks around import groups
+
+## Claude Code スキル
+
+共有スキル（`wc-development`、`woo-marketplace-*`、`wp-*` など）はこのリポジトリに同梱しない。元本は [shinobiashi/claude-skills](https://github.com/shinobiashi/claude-skills) で、`bash install.sh` により `~/.claude/skills/` に配置して使う（2026-09-09 から）。このテンプレートから作ったプロジェクトでも同様に、`.claude/skills/` にはプロジェクト固有のスキルだけを置く。
